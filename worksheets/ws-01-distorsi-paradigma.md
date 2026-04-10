@@ -125,7 +125,7 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+**Topik riset:** Pengujian algoritma (Genetika vs MIPSO)
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
