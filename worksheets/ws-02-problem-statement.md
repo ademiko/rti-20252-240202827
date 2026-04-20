@@ -170,5 +170,5 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 **Jawaban:**
 >Perbedaan fundamental antara masalah coding (seperti bug atau error) dengan masalah riset terletak pada tujuannya. Dalam coding, saya mendefinisikan masalah sebagai hambatan teknis yang harus segera diperbaiki agar sistem "berjalan" (orientasi solusi). Namun, dalam masalah riset, saya memandang hambatan tersebut sebagai gap pengetahuan yang perlu dibuktikan kebenarannya secara sistematis.
 
-Pendekatan riset menuntut saya untuk tidak hanya mencari solusi yang "penting jalan", tetapi harus bisa membuktikan mengapa solusi tersebut (misalnya algoritma MIPSO) lebih baik melalui variabel yang terukur, seperti nilai fitness yang dihitung dengan rumus:
+>Pendekatan riset menuntut saya untuk tidak hanya mencari solusi yang "penting jalan", tetapi harus bisa membuktikan mengapa solusi tersebut (misalnya algoritma MIPSO) lebih baik melalui variabel yang terukur, seperti nilai fitness yang dihitung dengan rumus:
 Fitness = 1/1+(C1+C2)
