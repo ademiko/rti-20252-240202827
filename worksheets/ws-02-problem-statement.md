@@ -141,7 +141,7 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 | Stakeholders |Pihak yang terlibat mencakup Admin MKU sebagai pengelola penjadwalan, dosen pengampu sebagai penerima jadwal, serta LPPM UPN "Veteran" Jawa Timur sebagai pendukung riset |
 
 **Komponen mana yang paling relevan dengan masalah riset?** Komponen Process
-Bagian Process merupakan inti dari penelitian ini karena di sinilah letak perbandingan eksperimental antara Algoritma Genetika dan MIPSO dilakukan. Fokus riset/penelitian ini adalah untuk membuktikan algoritma mana yang memiliki kinerja paling efisien dalam mengolah input menjadi output jadwal yang valid.
+>Bagian Process merupakan inti dari penelitian ini karena di sinilah letak perbandingan eksperimental antara Algoritma Genetika dan MIPSO dilakukan. Fokus riset/penelitian ini adalah untuk membuktikan algoritma mana yang memiliki kinerja paling efisien dalam mengolah input menjadi output jadwal yang valid.
 ---
 
 ## Latihan 3 — Problem Quality Check
