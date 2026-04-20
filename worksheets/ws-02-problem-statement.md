@@ -113,7 +113,7 @@ Jadi buat  penjadwal yang kompleks dengan banyak batasan (seperti jadwal dosen y
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** ________________________________________
+**Topik awal:**Optimasi Penjadwalan Mata Kuliah
 
 | Tahap | Hasil |
 |-------|-------|
