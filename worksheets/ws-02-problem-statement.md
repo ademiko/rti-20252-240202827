@@ -113,7 +113,7 @@ Jadi buat  penjadwal yang kompleks dengan banyak batasan (seperti jadwal dosen y
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** ________________________________________
+**Topik awal:**Optimasi Penjadwalan Mata Kuliah
 
 | Tahap | Hasil |
 |-------|-------|
@@ -141,7 +141,7 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 | Stakeholders |Pihak yang terlibat mencakup Admin MKU sebagai pengelola penjadwalan, dosen pengampu sebagai penerima jadwal, serta LPPM UPN "Veteran" Jawa Timur sebagai pendukung riset |
 
 **Komponen mana yang paling relevan dengan masalah riset?** Komponen Process
-Bagian Process merupakan inti dari penelitian ini karena di sinilah letak perbandingan eksperimental antara Algoritma Genetika dan MIPSO dilakukan. Fokus riset/penelitian ini adalah untuk membuktikan algoritma mana yang memiliki kinerja paling efisien dalam mengolah input menjadi output jadwal yang valid.
+>Bagian Process merupakan inti dari penelitian ini karena di sinilah letak perbandingan eksperimental antara Algoritma Genetika dan MIPSO dilakukan. Fokus riset/penelitian ini adalah untuk membuktikan algoritma mana yang memiliki kinerja paling efisien dalam mengolah input menjadi output jadwal yang valid.
 ---
 
 ## Latihan 3 — Problem Quality Check
@@ -170,5 +170,5 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 **Jawaban:**
 >Perbedaan fundamental antara masalah coding (seperti bug atau error) dengan masalah riset terletak pada tujuannya. Dalam coding, saya mendefinisikan masalah sebagai hambatan teknis yang harus segera diperbaiki agar sistem "berjalan" (orientasi solusi). Namun, dalam masalah riset, saya memandang hambatan tersebut sebagai gap pengetahuan yang perlu dibuktikan kebenarannya secara sistematis.
 
-Pendekatan riset menuntut saya untuk tidak hanya mencari solusi yang "penting jalan", tetapi harus bisa membuktikan mengapa solusi tersebut (misalnya algoritma MIPSO) lebih baik melalui variabel yang terukur, seperti nilai fitness yang dihitung dengan rumus:
+>Pendekatan riset menuntut saya untuk tidak hanya mencari solusi yang "penting jalan", tetapi harus bisa membuktikan mengapa solusi tersebut (misalnya algoritma MIPSO) lebih baik melalui variabel yang terukur, seperti nilai fitness yang dihitung dengan rumus:
 Fitness = 1/1+(C1+C2)
