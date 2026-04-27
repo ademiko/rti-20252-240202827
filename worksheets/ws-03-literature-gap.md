@@ -74,8 +74,9 @@ Literature Matrix (concept-centric):
 |Sofi'ie |2023| Experimental|Simulasi data 20.000 baris|Vue lebih gesit merender dan jauh lebih hemat RAM dibanding React.|Hasil angka sangat dipengaruhi oleh spesifikasi perangkat keras pengujian.|
 |Fakhrunnisa|2024|Scrum / Quant|Platform Talent Pool (PT XYZ)|Vue unggul di interaktivitas (INP 40ms) dan LCP tercepat (1,27 detik).|Vue unggul di interaktivitas (INP 40ms) dan LCP tercepat (1,27 detik).|
 |Putra et.al|2025|Experimental|Render 1.000 item list|Svelte menang mutlak (110ms) dan ukuran file paling kecil (22KB)| Baru dites pada aplikasi web yang sangat sederhana.|
-|Watung et.al| 2025|Qualitative	Dokumentasi & Studi Komunitas| Vue paling ramah pemula, React paling kuat untuk proyek tim raksasa.|Belum melakukan pengujian teknis mandiri secara mendalam.|
-|Taqiyassar|2026|Mann-Whitney U|3 Halaman Identik (Home, Ecom, News)Next.js jauh lebih stabil dan kencang dibanding React Router (p<=> 0,05).| Pengujian masih terbatas pada skenario aplikasi testbed. |
+|Watung et.al| 2025|Qualitative	|Dokumentasi & Studi Komunitas| Vue paling ramah pemula, React paling kuat untuk proyek tim raksasa.|Belum melakukan pengujian teknis mandiri secara mendalam.|
+|Taqiyassar|2026|Mann-Whitney U|3 Halaman Identik (Home, Ecom, News)|
+Next.js jauh lebih stabil dan kencang dibanding React Router (p<=> 0,05).| Pengujian masih terbatas pada skenario aplikasi testbed. |
 ```
 Pola yang ditemukan:
   Metode dominan     : Eksperimental kuantitatif menggunakan alat benchmarking seperti Google Lighthouse dan Chrome DevTools.
