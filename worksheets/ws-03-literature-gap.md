@@ -68,7 +68,7 @@ Tahun      : 2023-2026
 Hasil awal : 99 paper → Screening → 5 paper final
 
 Literature Matrix (concept-centric):
-
+```
 | Study | Tahun | Method | Data | Result | Limitation |
 |-------|-------|--------|------|--------|------------|
 |Sofi'ie |2023| Experimental|Simulasi data 20.000 baris|Vue lebih gesit merender dan jauh lebih hemat RAM dibanding React.|Hasil angka sangat dipengaruhi oleh spesifikasi perangkat keras pengujian.|
@@ -76,7 +76,7 @@ Literature Matrix (concept-centric):
 |Putra et.al|2025|Experimental|Render 1.000 item list|Svelte menang mutlak (110ms) dan ukuran file paling kecil (22KB)| Baru dites pada aplikasi web yang sangat sederhana.|
 |Watung et.al| 2025|Qualitative	Dokumentasi & Studi Komunitas| Vue paling ramah pemula, React paling kuat untuk proyek tim raksasa.|Belum melakukan pengujian teknis mandiri secara mendalam.|
 |Taqiyassar|2026|Mann-Whitney U|3 Halaman Identik (Home, Ecom, News)Next.js jauh lebih stabil dan kencang dibanding React Router (p<=> 0,05).| Pengujian masih terbatas pada skenario aplikasi testbed. |
-
+```
 Pola yang ditemukan:
   Metode dominan     : Eksperimental kuantitatif menggunakan alat benchmarking seperti Google Lighthouse dan Chrome DevTools.
   Dataset umum       : Menggunakan data riil perusahaan atau simulasi render daftar (list) dengan jumlah data besar.
@@ -100,7 +100,7 @@ Baseline Selection:
 |ReactJS| Standar industri paling banyak dipakai untuk aplikasi enterprise.|Memiliki ekosistem paling matang dan jumlah unduhan tertinggi (12jt/minggu).|Swari et al. (2022) , Putra et al. (2025)|
 VueJSL|awan tanding utama React dengan sistem reaktivitas yang lebih efisien.|Menjadi standar di banyak proyek karena kurva belajar yang ramah bagi pengembang.| Fakhrunnisa (2024) , Sofi'ie (2023).|
 ```
-```
+
 Review jurnal
 | penulis (tahun) | Rumusan Masalah | Hasil & Pembahasan | kelebihan | kekurangan |
 |-----------------|-----------------|--------------------|------------|-----------|
@@ -109,7 +109,7 @@ Review jurnal
 |Putra et al. (2025)|Framework mana yang paling kencang di antara Svelte, React, dan Vue?|Svelte menang mutlak. Dia paling kencang (110ms) dan ukuran filenya paling kecil (22KB) karena kodenya langsung jadi JavaScript biasa tanpa sistem tambahan yang berat.|Menguji sampai ke cara sistem mengubah tampilan (DOM) secara sangat teliti.|Hanya dites pada aplikasi web yang sangat sederhana.  |
 |Watung et al. (2025)|Dari sisi cara pakai dan kecepatan, mending pilih React atau Vue?|Vue buat pemula, React buat tim besar. Vue kodenya gampang dibaca karena mirip HTML biasa, tapi React punya bantuan (perpustakaan/komunitas) yang jauh lebih banyak untuk proyek raksasa|Membahas hal yang nggak cuma soal angka, tapi juga soal "gampang atau susahnya" dipelajari.|Kurang banyak tes teknis mandiri, lebih banyak merangkum dari riset-riset sebelumnya.|
 |Taqiyassar et al. (2026)|Antara Next.js dan React Router, mana yang loading-nya lebih oke?|Next.js jauh lebih stabil. Secara statistik, Next.js jauh lebih cepat memuat gambar dan konten besar dibanding React Router, baik pakai memori sementara (cache) maupun tidak.|Metodenya sangat bagus, pakai hitungan statistik biar datanya nggak bohong.|Fokus pengujiannya cuma terbatas di tiga jenis halaman saja|
-```
+
 ---
 
 ## Latihan 1 — Concept-Centric Literature Table
