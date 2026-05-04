@@ -70,57 +70,57 @@ RQ-CONTRIBUTION-HYPOTHESIS
 Gap Statement  : ____________________
 
 Research Question:
-  Tipe         : [ ] Comparison  [ ] Improvement  [ ] Exploratory
-  Formulasi    : ____________________
-  Variabel IV  : ____________________
-  Variabel DV  : ____________________
-  Metrik       : ____________________
-  Dataset      : ____________________
-  Baseline     : ____________________
+  Tipe         : [x] Comparison  [ ] Improvement  [ ] Exploratory
+  Formulasi    : Apakah penggunaan framework Next.js menghasilkan nilai metrik Largest Contentful Paint (LCP) yang secara signifikan lebih rendah dibandingkan React Router v7 pada skenario halaman web E-commerce yang memuat aset gambar berukuran rata-rata 2MB per item?
+  Variabel IV  : Jenis framework website yang digunakan (Next.js vs React Router v7)
+  Variabel DV  : Performa kecepatan pemuatan konten utama (Largest Contentful Paint)
+  Metrik       : Waktu pemuatan dalam satuan milidetik (ms)
+  Dataset      : Aplikasi testbed berupa halaman E-commerce dengan beban aset gambar 2MB per item
+  Baseline     : React Router v7
 
 Quality Check RQ:
-  [ ] Variabel spesifik
-  [ ] Metrik jelas
-  [ ] Baseline ada
-  [ ] Konteks disebutkan
-  [ ] Memerlukan eksperimen (bukan hanya survei literatur)
+  [x] Variabel spesifik
+  [x] Metrik jelas
+  [x] Baseline ada
+  [x] Konteks disebutkan
+  [xx] Memerlukan eksperimen (bukan hanya survei literatur)
 
 Contribution Statement:
-  Apa yang baru diketahui : ____________________
-  Jenis kontribusi        : [ ] Improvement  [ ] Comparison  [ ] Novel approach
-  Gap yang diisi          : ____________________
+  Apa yang baru diketahui : Bukti empiris terukur mengenai efisiensi strategi rendering antara Next.js dan React Router pada kondisi riil dengan beban aset gambar yang berat
+  Jenis kontribusi        : [ ] Improvement  [x] Comparison  [ ] Novel approach
+  Gap yang diisi          : Context Gap dan Method Gap terkait perbandingan performa framework modern pada skenario aplikasi skala besar
 
 Hypothesis Pair:
-  H₀ : ____________________
-  H₁ : ____________________
-  Threshold              : ____________________
-  Justifikasi threshold  : ____________________
+  H₀ : Tidak ada perbedaan yang signifikan pada nilai metrik Largest Contentful Paint (LCP) antara penggunaan Next.js dan React Router pada skenario halaman web E-commerce dengan beban aset gambar 2MB per item
+  H₁ : Penggunaan Next.js menghasilkan nilai metrik Largest Contentful Paint (LCP) yang secara signifikan lebih rendah (lebih cepat) dibandingkan React Router pada skenario halaman web E-commerce dengan beban aset gambar 2MB per item
+  Threshold              : Nilai signifikansi (p-value) <= 0,05
+  Justifikasi threshold  : Tingkat signifikansi 5% merupakan standar pengujian statistik inferensial (seperti uji Mann-Whitney U) dalam riset Informatika untuk menolak H₀ secara meyakinkan, sehingga perbedaan performa dipastikan valid dan bukan sekadar kebetulan
 ```
 
 ---
-
+Melanjutkan dari literatur gap ws 3, di mana pengujian framework modern masih banyak yang terbatas pada aplikasi sederhana dan belum menguji kondisi riil dengan beban aset yang besar. Pada WS-04, akan menarik gap tersebut menjadi sebuah rumusan masalah (Research Question) dan hipotesis yang solid. Tujuannya adalah agar celah penelitian yang sudah ditemukan bisa dieksekusi menjadi eksperimen yang spesifik, terukur, dan dapat dibuktikan kebenarannya secara statistik. 
+---
 ## Latihan 1 — Dari Gap ke RQ
 
 Gunakan gap yang ditemukan di WS-03. Transformasikan menjadi Research Question.
 
-**Gap dari WS-03:** ____________________________________
+**Gap dari WS-03:** Minimnya pengujian empiris dan perbandingan performa teknis secara langsung antara framework terbaru (Next.js vs React Router) pada skenario aplikasi kompleks dengan beban aset yang besar (heavy assets).
 
 **RQ versi pertama (tulis bebas):**
-> ___________________________________________________
-
+> Bagaimana perbandingan performa kecepatan antara Next.js dan React Router kalau dipakai untuk membuat halaman website dengan banyak gambar dan video berukuran besar?
 **Evaluasi RQ:**
 
 | Komponen | Ada? | Isi |
 |----------|------|-----|
-| Metode spesifik | *Contoh: Ya — CNN vs RF* | |
-| Metrik terukur | | |
-| Baseline | | |
-| Dataset/konteks | | |
+| Metode spesifik | ya |Komparasi strategi rendering antara Next.js dan React Router. |
+| Metrik terukur |tidak |Hanya menyebut "performa kecepatan" (belum ada metrik spesifik seperti FCP atau LCP) |
+| Baseline | ya |React Router v7. |
+| Dataset/konteks | sebagian | "Website dengan banyak gambar dan video" masih terlalu ambigu dan belum terukur. |
 
-**Tipe RQ:** [ ] Comparison / [ ] Improvement / [ ] Exploratory
+**Tipe RQ:** [x] Comparison / [ ] Improvement / [ ] Exploratory
 
 **RQ versi revisi (setelah evaluasi):**
-> ___________________________________________________
+> Apakah penggunaan framework Next.js menghasilkan nilai metrik Largest Contentful Paint (LCP) yang secara signifikan lebih rendah (lebih cepat) dibandingkan React Router v7 pada skenario halaman web E-commerce yang memuat aset gambar berukuran rata-rata 2MB per item?
 
 ---
 
@@ -130,14 +130,15 @@ Rumuskan pasangan hipotesis dari RQ di Latihan 1.
 
 | Komponen | Isi |
 |----------|-----|
-| H₀ | *Contoh: Tidak ada perbedaan signifikan F1-Score antara CNN dan RF pada dataset CIC-MalMem-2022* |
-| H₁ | |
-| Metrik | |
-| Threshold | |
-| Justifikasi threshold | |
+| H₀ | Tidak ada perbedaan yang signifikan pada nilai metrik Largest Contentful Paint (LCP) antara penggunaan framework Next.js dan React Router pada skenario halaman web E-commerce dengan beban aset gambar 2MB per item. |
+| H₁ | Penggunaan framework Next.js menghasilkan nilai metrik Largest Contentful Paint (LCP) yang secara signifikan lebih rendah (lebih cepat) dibandingkan React Router pada skenario halaman web E-commerce dengan beban aset gambar 2MB per item. |
+| Metrik | Waktu Largest Contentful Paint (LCP) yang diukur dalam satuan milidetik (ms). |
+| Threshold | Nilai signifikansi (p-value) <= 0,05. |
+| Justifikasi threshold | Tingkat signifikansi 5% (a(alpha) = 0,05) merupakan standar pengujian statistik inferensial (seperti uji Mann-Whitney U) dalam riset Informatika. Batas ini digunakan untuk menolak hipotesis nol (H0) secara meyakinkan dan memastikan bahwa perbedaan performa yang terjadi bukan sekadar kebetulan. |
 
-**Apakah hipotesis ini falsifiable?** [ ] Ya / [ ] Tidak
-> Bagaimana cara membuktikannya salah? ___________________
+**Apakah hipotesis ini falsifiable?** [x] Ya / [ ] Tidak
+> Bagaimana cara membuktikannya salah? 
+> Dengan mengumpulkan data waktu LCP dari kedua framework lalu menjalankan uji statistik non-parametrik Mann-Whitney U. Jika hasil perhitungan menunjukkan p-value > 0,05, maka H0 gagal ditolak. Hal ini secara otomatis akan membuktikan bahwa klaim H1 (bahwa Next.js lebih cepat) adalah salah atau tidak terbukti secara statistik pada skenario tersebut.
 
 ---
 
@@ -147,15 +148,15 @@ Lengkapi rantai dari RQ hingga metode analisis.
 
 | Tahap | Isi |
 |-------|-----|
-| RQ | *Contoh: Apakah CNN menghasilkan F1-Score lebih tinggi dari RF...* |
-| Variable (IV) | *Contoh: Jenis algoritma (CNN vs RF)* |
-| Variable (DV) | |
-| Metric | |
-| Data source | |
-| Analysis method | |
+| RQ | Apakah penggunaan framework Next.js menghasilkan nilai metrik Largest Contentful Paint (LCP) yang secara signifikan lebih rendah dibandingkan React Router v7 pada skenario halaman E-commerce dengan aset gambar 2MB? |
+| Variable (IV) | Jenis framework website yang diuji (Next.js vs. React Router v7) |
+| Variable (DV) | Performa kecepatan pemuatan konten utama (Largest Contentful Paint). |
+| Metric | Waktu pemuatan dalam satuan milidetik (ms) |
+| Data source | Data hasil pengujian otomatis pada aplikasi testbed yang dikumpulkan melalui tools WebPageTest |
+| Analysis method | Analisis statistik deskriptif (rata-rata/standar deviasi) dan uji inferensial Mann-Whitney U untuk menentukan tingkat signifikansi. |
 
-**Apakah rantai lengkap?** [ ] Ya / [ ] Tidak
-> Jika tidak, tahap mana yang perlu direvisi? ______________
+**Apakah rantai lengkap?** [x] Ya / [ ] Tidak
+> Jika tidak, tahap mana yang perlu direvisi? (Sudah lengkap, karena semua tahapan dari variabel hingga metode analisis sudah saling terhubung secara logis dan siap untuk dieksekusi dalam eksperimen).
 
 ---
 
@@ -163,6 +164,6 @@ Lengkapi rantai dari RQ hingga metode analisis.
 
 > Ambil satu judul skripsi/paper yang pernah dibaca. Coba ekstrak RQ-nya. Apakah RQ tersebut memenuhi semua komponen (metode, metrik, baseline, konteks)? Jika tidak, apa yang hilang?
 
-**Judul:** _____________________________________________
-**RQ yang diekstrak:** __________________________________
-**Komponen yang hilang:** _______________________________
+**Judul:** Analisis Perbandingan Performa Framework Website Next.js dan React Router.
+**RQ yang diekstrak:** Apakah terdapat perbedaan signifikan pada metrik Largest Contentful Paint (LCP) antara Next.js dan React Router v7 pada skenario halaman E-commerce dengan aset gambar 2MB?.
+**Komponen yang hilang:** Secara teknis, RQ ini sudah memenuhi semua komponen inti karena mencakup metode (perbandingan framework), metrik (LCP), baseline (React Router), dan konteks (halaman E-commerce dengan aset 2MB). Namun, jika dilihat dari sisi operasional, hal yang sering "tersembunyi" atau tidak disebutkan langsung di kalimat RQ adalah threshold signifikansi statistik (seperti penggunaan alpha = 0,05) dan alat uji spesifik yang digunakan (misalnya uji Mann-Whitney U). Tanpa penyebutan ambang batas ini, pembaca hanya tahu apa yang diukur, tapi tidak tahu standar apa yang digunakan untuk menyatakan bahwa perbedaan tersebut benar-benar signifikan secara ilmiah.
