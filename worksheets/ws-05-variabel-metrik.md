@@ -95,7 +95,7 @@ Gunakan RQ dari WS-04. Definisikan variabel dan metriknya.
 |System Usability| DV |Kemudahan dan kenyamanan interaksi|Skor komposit SUS (System Usability Scale)|Interval|Poin (0-100)|
 |Trust Level| CV |Kepercayaan pengguna terhadap aplikasi|Rata-rata skor Trust Scale (Skala Likert)|Ordinal|Poin (1-5)|
 
-**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [ ] Tidak
+**Apakah ada lompatan logis dalam rantai?** [ ] Ya / [x] Tidak
 > Jika ya, di mana?tidak ada
 >Rantai operasionalisasi ini sudah logis karena konsep abstrak "kenyamanan" langsung diukur secara kuantitatif menggunakan instrumen baku di industri (SUS), dan konsep "kepercayaan" diukur menggunakan kuesioner skala Likert yang sudah divalidasi oleh literatur jurnal terdahulu.
 
