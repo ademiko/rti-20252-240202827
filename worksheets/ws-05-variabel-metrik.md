@@ -63,7 +63,7 @@ Metrik harus ditentukan **sebelum** eksperimen. Memilih metrik setelah melihat d
 
 ## Template A.5 — Definisi Variabel, Metrik & Justifikasi
 
-```
+
 VARIABLE & METRIC DEFINITION
 
 Research Question: Apakah desain antarmuka yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability dan tingkat kepercayaan pengguna yang secara signifikan lebih rendah dibandingkan antarmuka standar?
