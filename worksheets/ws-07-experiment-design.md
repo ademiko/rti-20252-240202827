@@ -72,11 +72,13 @@ Research Question : Apakah desain antarmuka yang menggunakan trik Urgency Dark P
 Hypothesis        : Terdapat penurunan skor usability dan tingkat kepercayaan yang signifikan secara statistik pada antarmuka dengan Urgency Dark Pattern dibandingkan antarmuka standar.
 Tipe Eksperimen   : [ x ] Comparison  [ ] Ablation  [ ] Parameter
 ---
+```
 Kondisi Eksperimen:
 | Kondisi | Deskripsi | IV Value | CV Settings |
 |---------|-----------|----------|-------------|
 | Control |Purwarupa aplikasi belanja baseline tanpa tekanan waktu.|UI Normal (Standar)|Skenario tugas (Batal langganan), layout dasar, dan platform pengujian (Figma) identik.|
 | Treatment |Purwarupa aplikasi belanja dengan timer diskon hitung mundur palsu.|UI Urgency Dark Pattern|Skenario tugas, layout dasar, dan platform pengujian identik.|
+```
 ---
 Fairness Checklist:
   [x] Dataset identik untuk semua kondisi
@@ -85,6 +87,7 @@ Fairness Checklist:
   [x] Environment identik
   [x] Metrik evaluasi sama
 
+```
 Threat Analysis:
 | Threat Type | Ancaman Spesifik | Mitigasi |
 |-------------|-----------------|----------|
@@ -92,7 +95,7 @@ Threat Analysis:
 | External    | Rasa panik di purwarupa Figma tidak senyata di aplikasi e-commerce sungguhan. | Membuat desain antarmuka High-Fidelity yang sangat detail dan realistis. |
 | Construct   | Responden salah tafsir pertanyaan kuesioner atau mengisi secara asal-asalan. | Memakai kuesioner baku berbahasa Indonesia dan menyaring (drop) data yang anomali. |
 | Conclusion  | Jumlah responden terlalu sedikit sehingga hasil uji statistik tidak valid. | Menetapkan target minimal 40 responden (20 per kelompok eksperimen). |
-
+```
 Statistical Plan:
   Uji statistik   : Mann-Whitney U Test (atau Independent T-Test jika data berdistribusi normal).
   Justifikasi      : Desain Between-Subjects menghasilkan dua kelompok sampel independen. Uji ini cocok untuk membandingkan perbedaan rata-rata skor SUS dan Trust antar dua kelompok
