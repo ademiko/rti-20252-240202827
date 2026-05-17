@@ -71,13 +71,13 @@ EXPERIMENT DESIGN
 Research Question : Apakah desain antarmuka yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability dan tingkat kepercayaan pengguna yang secara signifikan lebih rendah dibandingkan antarmuka standar?
 Hypothesis        : Terdapat penurunan skor usability dan tingkat kepercayaan yang signifikan secara statistik pada antarmuka dengan Urgency Dark Pattern dibandingkan antarmuka standar.
 Tipe Eksperimen   : [ x ] Comparison  [ ] Ablation  [ ] Parameter
-
+---
 Kondisi Eksperimen:
 | Kondisi | Deskripsi | IV Value | CV Settings |
 |---------|-----------|----------|-------------|
 | Control |Purwarupa aplikasi belanja baseline tanpa tekanan waktu.|UI Normal (Standar)|Skenario tugas (Batal langganan), layout dasar, dan platform pengujian (Figma) identik.|
 | Treatment |Purwarupa aplikasi belanja dengan timer diskon hitung mundur palsu.|UI Urgency Dark Pattern|Skenario tugas, layout dasar, dan platform pengujian identik.|
-
+---
 Fairness Checklist:
   [x] Dataset identik untuk semua kondisi
   [x] Preprocessing setara
