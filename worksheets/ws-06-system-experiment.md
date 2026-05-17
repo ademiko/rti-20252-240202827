@@ -67,25 +67,25 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ```
 SYSTEM-EXPERIMENT MAPPING
 
-Research Question: ____________________
+Research Question: Apakah desain antarmuka yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability dan tingkat kepercayaan pengguna yang secara signifikan lebih rendah dibandingkan antarmuka standar?
 
 Variable → Component Mapping:
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
 |----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
+|Jenis Antarmuka| IV   |Purwarupa interaktif (Figma)|Memanipulasi komponen UI: mengaktifkan/menonaktifkan elemen Urgency (fake timer).|
+|Usability & Kepercayaan| DV   |Instrumen Kuesioner (Google Forms / Maze)|Mengukur respons melalui kuesioner SUS dan Trust Scale setelah simulasi.|
+|Skenario Tugas| CV   |Alur Navigasi (User Flow)|Mengunci alur penyelesaian tugas agar persis sama untuk kedua kelompok.|
 
 4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
+  [ x ] Traceability — Setiap komponen bisa ditelusuri ke variabel
+  [ x ] Variable Isolation — IV bisa diubah tanpa mengubah CV
+  [ x ] Measurement Integration — Pengukuran DV built-in
+  [ x ] Reproducibility — Setup bisa direkonstruksi
 
 Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
+  Input data     : Interaksi klik dan waktu respons dari pengguna.
+  Parameter      : Versi antarmuka (Normal vs Dark Pattern).
+  Output format  : Skor komposit (0-100 untuk SUS) dan skala ordinal (1-5 untuk kepercayaan) dalam format CSV/Excel.
 ```
 
 ---
@@ -94,16 +94,16 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:** Apakah desain antarmuka yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability dan tingkat kepercayaan pengguna yang secara signifikan lebih rendah dibandingkan antarmuka standar?
 
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Trik Dark Pattern | IV | Komponen visual di Frame Figma | Mengganti tampilan frame (tambah/hapus banner timer diskon palsu). |
+| Skor SUS | DV | Modul pengumpulan data (Google Forms) | Menghitung otomatis skor dari 10 pertanyaan baku SUS. |
+| Skenario Tugas | CV | User Flow Checkout | Memastikan tombol navigasi utama tidak diubah ukurannya atau posisinya. |
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
-> Jika tidak, komponen apa yang perlu ditambahkan? _________
+**Apakah semua variabel bisa di-map?** [x] Ya / [ ] Tidak
+> Jika tidak, komponen apa yang perlu ditambahkan?Tidak ada komponen yang perlu ditambahkan karena variabel teknis dan psikologis sudah terwakili oleh purwarupa dan instrumen kuesioner
 
 ---
 
@@ -113,31 +113,31 @@ Evaluasi desain sistem terhadap 4 prinsip.
 
 | Prinsip | Status | Bukti / Penjelasan |
 |---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| Traceability | ✅ Memenuhi | Variabel independen terpetakan langsung ke varian desain di Figma, dan variabel dependen ke form kuesioner. |
+| Modularity | ✅ Memenuhi | Elemen Dark Pattern dibuat sebagai component independen di Figma, sehingga bisa dihidupkan/dimatikan tanpa merusak layout dasar aplikasi. |
+| Controllability | ✅ Memenuhi | Skenario tugas, instruksi awal, dan durasi pengerjaan dibakukan dalam bentuk script eksperimen yang dikontrol ketat oleh peneliti. |
+| Measurability | Sebagian | Hasil survei otomatis terekap di spreadsheet, namun pelacakan durasi (Task Completion Time) murni di Figma cukup sulit secara bawaan. |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+**Prinsip mana yang paling sulit dipenuhi?** Measurability (khususnya untuk akurasi waktu penyelesaian tugas di Figma).
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
+> Mengintegrasikan purwarupa Figma dengan platform unmoderated testing (seperti Maze atau Useberry). Platform ini akan bertindak sebagai "sistem perekam" yang otomatis mencatat durasi, jumlah salah klik (misclick), dan heatmap tanpa perlu coding dari nol
 
 ---
 
 ## Latihan 3 — Ablation Study Planning
 
-Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
+Jika sistem memiliki 3 komponen utama,(dalam konteks Urgency Dark Pattern), rencanakan ablation study untuk melihat elemen mana yang paling manipulatif.
 
-| Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
+| Kondisi | Komponen A (Fake Timer) | Komponen B (Low Stock Warning) | Komponen C (Social Proof/Activity) | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Full | ✅ aktif | ✅ aktif | ✅ aktif| Penurunan skor SUS dan Kepercayaan paling parah (Baseline) |
+| – A | ❌ dinonaktifkan | ✅ aktif | ✅ aktif | Melihat apakah tanpa tekanan waktu, pengguna menjadi lebih logis. |
+| – B | ✅ aktif | ❌ dinonaktifkan| ✅ aktif | Mengukur dampak ancaman kelangkaan barang (scarcity). |
+| – C | ✅ aktif | ✅ aktif | ❌ dinonaktifkan | Mengukur efek fear of missing out (FOMO) komunal. |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+**Komponen mana yang diprediksi paling berkontribusi?** Komponen A (Fake Countdown Timer).
 **Mengapa?**
-> ___________________________________________________
+> Karena elemen ini memberikan tekanan kognitif dan visual secara langsung berupa waktu yang terus berkurang. Hal ini memicu kepanikan dan memaksa pengguna untuk mengambil keputusan impulsif (terburu-buru) tanpa sempat membaca informasi lain secara rasional, sehingga sangat merusak kenyamanan navigasi
 
 ---
 
@@ -146,5 +146,6 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Jika sistem dibangun penuh layaknya produk rilis (monolitik) sebelum dieksperimen, peneliti tidak akan bisa mengetahui elemen spesifik mana yang sebenarnya memengaruhi perilaku pengguna. Variabel pengganggu (noise) akan sangat banyak—apakah pengguna bingung karena ada Dark Pattern, atau sekadar karena warna tombolnya kurang mencolok, atau karena aplikasinya lag?
+> Arsitektur yang modular (seperti memisahkan elemen manipulatif ke komponen tersendiri) sangat penting dalam riset karena memungkinkan penerapan prinsip Isolasi Variabel. Peneliti bisa membongkar-pasang satu komponen secara terukur sambil memastikan bahwa kondisi sistem lainnya tetap konstan dan adil untuk dibandingkan.
+ 
