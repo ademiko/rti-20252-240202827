@@ -90,13 +90,13 @@ Kumpulkan hasil dari WS-02 sampai WS-07 menjadi satu ringkasan proposal.
 
 | Komponen | Sumber | Isi (1-2 kalimat) |
 |----------|--------|-------------------|
-| Problem Statement | WS-02 | *Contoh: Sistem rekomendasi memiliki akurasi tinggi (RMSE 0.87) tetapi satisfaction score rendah (45/100). Gap antara metrik teknis dan kepuasan pengguna belum diteliti.* |
-| Gap | WS-03 | *Contoh: Tidak ada studi yang mengintegrasikan collaborative filtering dengan user-context signals untuk meningkatkan satisfaction.* |
-| RQ | WS-04 | *Contoh: Apakah penambahan context-aware signals pada collaborative filtering meningkatkan satisfaction score tanpa menurunkan RMSE?* |
-| Hipotesis | WS-04 | *Contoh: H₁: Sistem CF+context menghasilkan satisfaction ≥ 70/100 dengan RMSE ≤ 0.90 dibanding baseline CF murni.* |
-| Variabel & Metrik | WS-05 | *Contoh: IV = jenis sistem (CF vs CF+context); DV = satisfaction score (skala 0-100) + RMSE (regresi).* |
-| Sistem | WS-06 | |
-| Desain Eksperimen | WS-07 | |
+| Problem Statement | WS-02 |Pengguna e-commerce menghadapi manipulasi tekanan waktu palsu (Urgency Dark Pattern) yang secara nyata mengganggu kenyamanan navigasi dan menghancurkan rasa aman serta kepercayaan konsumen|
+| Gap | WS-03 | Riset sebelumnya hanya bersifat kualitatif, belum ada pengukuran kuantitatif empiris absolut yang membandingkan besaran penurunan metrik usability dan trust secara langsung jika elemen urgensi ini diisolasi. |
+| RQ | WS-04 | Apakah desain antarmuka e-commerce yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability dan tingkat kepercayaan pengguna yang secara signifikan lebih rendah dibandingkan antarmuka standar?|
+| Hipotesis | WS-04 | H₁: Terdapat penurunan skor usability (SUS) dan tingkat kepercayaan pengguna (Trust Scale) yang signifikan secara statistik pada antarmuka bermuatan Urgency Dark Pattern dibandingkan baseline.|
+| Variabel & Metrik | WS-05 | IV = Jenis Antarmuka (Normal vs Dark Pattern); DV: Tingkat kenyamanan (Skor komposit SUS 0-100) dan Kepercayaan (Skor Trust Scale ordinal 1-5).|
+| Sistem | WS-06 | Dua purwarupa Figma interaktif (satu standar, satu manipulatif dengan fake timer) yang terhubung dengan platform pengujian otomatis (Maze) untuk merekam respons.|
+| Desain Eksperimen | WS-07 | A/B Testing (Between-Subjects) mandiri pada 40 partisipan independen untuk membandingkan kelompok kontrol dan perlakuan, dianalisis menggunakan Mann-Whitney U Test. |
 
 ---
 
@@ -106,19 +106,18 @@ Verifikasi 6 koneksi kritis. Isi dengan merujuk tabel di Latihan 1.
 
 | Koneksi | Status | Bukti |
 |---------|--------|-------|
-| Problem → Gap | *Contoh: ✅ — gap muncul dari 15 paper Bab 3 yang tidak ada yang mengkombinasikan CF + context untuk satisfaction* | |
-| Gap → RQ | *Contoh: ✅ — RQ langsung menanyakan apakah CF+context meningkatkan satisfaction* | |
-| RQ → Hypothesis | *Contoh: ✅ — H₁ memprediksi satisfaction ≥ 70 dengan threshold RMSE ≤ 0.90* | |
-| Hypothesis → Metric | | |
-| Metric → System | | |
-| System → Experiment | | |
+| Problem → Gap | ✅| Masalah rusaknya atau hilangnya kenyamanan dan kepercayaan divalidasi oleh literatur, namun belum ada angka empiris yang mengukur seberapa parah kerusakan tersebut secara kuantitatif. |
+| Gap → RQ | ✅| RQ secara langsung menanyakan perbandingan signifikan skor usability dan trust untuk mengisi kekosongan data kuantitatif yang belum terjawab. |
+| RQ → Hypothesis | ✅ | H₁ secara presisi memprediksi jawaban RQ dengan menyatakan adanya "penurunan signifikan" pada skor SUS dan Trust Scale akibat Urgency Dark Pattern|
+| Hypothesis → Metric | ✅ | Penurunan yang diprediksi diukur dengan metrik absolut yang jelas: Skor SUS (0-100) dan Trust Scale (1-5).|
+| Metric → System | ✅ | Instrumen kuesioner elektronik diintegrasikan di akhir alur Maze untuk memastikan metrik terekam langsung setelah partisipan selesai bernavigasi. |
+| System → Experiment | ✅ | Purwarupa Figma memfasilitasi pengujian A/B Testing secara unmoderated, menjaga isolasi variabel dan mencegah bias kehadiran peneliti (Hawthorne Effect). |
 
-**Koneksi mana yang paling lemah?** _______________________
+**Koneksi mana yang paling lemah?** Metric → System
 **Bagaimana cara memperkuatnya?**
-> ___________________________________________________
+> Karena pelacakan metrik seperti waktu penyelesaian (Time on Task) atau error rate secara manual di Figma cukup sulit, koneksi ini diperkuat dengan mengintegrasikan purwarupa ke dalam platform usability testing khusus (seperti Maze) agar data kuantitatif terekam secara otomatis dan akurat.
 
-**Konsistensi horizontal — apakah istilah dan scope konsisten?** [ ] Ya / [ ] Tidak
-> Jika tidak, di bagian mana terjadi inkonsistensi? _________
+**Konsistensi horizontal — apakah istilah dan scope konsisten?** [x] Ya / [ ] Tidak
 
 ---
 
@@ -128,15 +127,14 @@ Evaluasi proposal mini menggunakan rubrik.
 
 | Kriteria | Skor (1-3) | Justifikasi |
 |----------|-----------|-------------|
-| Koherensi | *Contoh: 2 — koneksi gap→RQ masih lemah karena gap belum cukup narrow* | |
-| Specificity | *Contoh: 3 — metrik (satisfaction 0-100, RMSE) sudah terdefinisi numerik* | |
-| Feasibility | | |
-| Rigor | | |
+| Koherensi | 3 | Alur argumen vertikal sangat mulus; masalah manipulasi psikologis terhubung langsung ke pengujian A/B Testing yang spesifik mengisolasi variabel timer.|
+| Specificity | 3 | Metrik sudah didefinisikan dalam bentuk numerik yang tervalidasi secara global (Skor SUS komposit dan Skala Likert untuk Trust). |
+| Feasibility | 3 | Desain sistem dan instrumen sangat realistis dieksekusi secara daring menggunakan perangkat lunak tanpa biaya tinggi seperti Figma dan Google Forms. |
+| Rigor | 3 |Eksperimen memiliki validitas tinggi karena menerapkan Random Assignment, standardisasi instruksi, dan kontrol ketat terhadap variabel perancu (confounding variables).|
 
-**Skor total:** _____ / 12
+**Skor total:** 12 / 12
 
-**Apakah proposal siap untuk fase eksekusi?** [ ] Ya / [ ] Belum
-> Jika belum, apa yang perlu diperbaiki? __________________
+**Apakah proposal siap untuk fase eksekusi?** [x] Ya / [ ] Belum
 
 ---
 
@@ -144,8 +142,7 @@ Evaluasi proposal mini menggunakan rubrik.
 
 > Dari seluruh proses WS-01 sampai WS-08, bagian mana yang paling mudah dan paling sulit? Mengapa? Apa yang akan dilakukan berbeda jika mengulang dari awal?
 
-**Bagian termudah:** ____________________________________
-**Bagian tersulit:** ____________________________________
+**Bagian termudah:** Menentukan Metrik (WS-05) dan RQ (WS-04) karena instrumen pengukurannya (System Usability Scale dan Trust Scale) sudah baku di industri dan siap digunakan. RQ juga mudah ditarik karena variabel independen dan dependennya sangat terpusat. 
+**Bagian tersulit:** Memastikan External Validity pada Desain Eksperimen (WS-07) karena tantangan terbesarnya adalah membuat simulasi Figma terasa nyata. Rasa panik yang muncul akibat "waktu habis" di purwarupa tidak akan 100% sama dengan aplikasi asli yang melibatkan transaksi finansial sungguhan.
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
-> ___________________________________________________
+> Jika mengulang dari awal, saya akan memasukkan satu tahapan pilot testing singkat pada beberapa orang responden di luar target sampel sebelum menyusun proposal final. Hal ini penting untuk memverifikasi apakah timer manipulatif yang dibuat di Figma benar-benar mampu memicu efek terburu-buru, sehingga arsitektur purwarupa bisa disempurnakan lebih matang sejak awal eksperimen.

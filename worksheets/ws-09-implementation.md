@@ -63,32 +63,35 @@ Capai **repeatability** dulu, baru **reproducibility**.
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : 13th Gen Intel(R) Core(TM) i5-13450HX (2.40 GHz)
+  RAM     : 12 GB DDR5
+  GPU     : NVIDIA GeForce RTX 3050 6GB Laptop GPU (6 GB)
+Intel(R) UHD Graphics (128 MB)
+  Storage : 512 gb
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Windows 11 64-bit
+  Runtime   : Google Chrome & Python
+  Framework : Figma (Purwarupa), Maze (Testing Platform), Jupyter/Google Colab
 
 Dependencies:
 | Library | Version | Sumber | Hash/Checksum |
 |---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+| Figma|126.3.12|figma.com|(Cloud-based, N/A)|
+|Maze Platform|Web Cloud|maze.co|(Cloud-based, N/A)|
+| pandas (Python) | | PyPI / pip repository | sha256: 8a... (terlampir)|
+|scipy (Python)| | PyPI / pip repository | sha256: 3f... (terlampir)  |
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
+  Config file     : config_eksperimen.json (Menyimpan variabel ambang batas & nama grup)
+  Random seed     : 42 (Digunakan pada tahap pembersihan data Python/Pandas)
+  Hyperparameters : Alpha threshold (Batas signifikansi) = 0.05
 
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+  [x] Dependency terdokumentasi (requirements.txt / lock file)
+  [x] Seed ditetapkan di semua level (Python, NumPy, framework)
+  [x] Config di version control
+  [x] README instruksi reproduksi lengkap
 ```
 
 ---
@@ -99,23 +102,24 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 | Komponen | Spesifikasi |
 |----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| CPU | 13th Gen Intel(R) Core(TM) i5-13450HX (2.40 GHz) |
+| RAM | 12 GB DDR5 |
+| GPU | NVIDIA GeForce RTX 3050 6GB Laptop GPU (6 GB)
+Intel(R) UHD Graphics (128 MB) |
+| OS | Windows 11 |
+| Runtime | Google Chrome |
+| Framework | Figma (Desain Purwarupa) & Maze (Unmoderated Testing Platform) |
+| Random Seed | 42 (Ditetapkan pada modul Python/SPSS saat melakukan random assignment pembagian kelompok responden agar dapat direproduksi) |
 
 **Dependencies (minimal 5):**
 
 | Library | Version | Alasan Dibutuhkan |
 |---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| Figma (Desktop) | 126.3.12 | Untuk mendesain antarmuka High-Fidelity dan komponen Fake Countdown Timer. |
+| Maze Platform | Versi Web Cloud | Untuk meng- hosting purwarupa Figma, merekam durasi penyelesaian tugas, dan melacak misclick responden. |
+| Google Forms | Google Forms | Untuk mendistribusikan kuesioner System Usability Scale (SUS) dan Trust Scale. |
+| Python (SciPy) |(belum terinstal) | Library komputasi statistik untuk menjalankan uji Mann-Whitney U Test pada hasil kuesioner. |
+| Python (Pandas) | (belum terinstal)| Library manipulasi data untuk membersihkan (cleaning) data mentah kuesioner (menghapus data outlier/anomali). |
 
 ---
 
@@ -125,18 +129,19 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 
 | Run | Seed | Metrik Utama | Hasil Sama? |
 |-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| 1 | 42 | Nilai p-value (Mann-Whitney) & Rata-rata Skor SUS | — |
+| 2 | 42 | Nilai p-value (Mann-Whitney) & Rata-rata Skor SUS | [x] Ya / [ ] Tidak |
+| 3 | 42 | Nilai p-value (Mann-Whitney) & Rata-rata Skor SUS | [x] Ya / [ ] Tidak |
 
 **Jika hasil berbeda, kemungkinan penyebab:**
-> ___________________________________________________
+> File dataset (Excel/CSV) sumber mengalami perubahan di latar belakang (misalnya ada responden baru yang masuk ke Google Forms di tengah-tengah proses analisis).
+> Parameter algoritma pembersihan data (data cleaning) untuk membuang nilai outlier tidak menggunakan urutan (seed) yang deterministik, sehingga baris data yang dibuang berbeda-beda setiap kali program dijalankan.
 
 **Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
-- [ ] Cache dibersihkan antar-run
-- [ ] Config file yang sama untuk semua run
+- [x] Random seed di-set di semua level
+- [x] Tidak ada background process yang mengganggu
+- [x] Cache dibersihkan antar-run
+- [x] Config file yang sama untuk semua run
 
 ---
 
@@ -145,25 +150,43 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 ```
-# Judul Eksperimen: ____________________
+# Judul Eksperimen: Analisis Dampak Urgency Dark Pattern terhadap Usability dan User Trust pada Antarmuka E-Commerce
 
 ## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+- CPU       : intel Core(TM) i5-13450HX 
+- RAM       : 12 GB DDR5
+- GPU       :  NVIDIA GeForce RTX 3050 6GB Laptop GPU (6 GB)
+Intel(R) UHD Graphics (128 MB)
+- OS        : Windows 11 64-bit
+- Runtime   : Google Chrome Version 
+- Alat      : Figma (126.3.12), Maze Platform, Google Colab
+- Seed      : 42 (untuk analisis data)
 
 ## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+Karena instrumen eksperimen menggunakan platform berbasis komputasi awan (Cloud/Web), tidak diperlukan instalasi perangkat lunak lokal yang rumit. Untuk analisis data, cukup jalankan perintah berikut pada environment Google Colab:
+`pip install pandas==2.1.0 scipy==1.11.1`
 
 ## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+Data eksperimen merupakan data primer yang bersumber dari respons 40 partisipan melalui kuesioner daring (Google Forms) dan log navigasi dari platform Maze. 
+- Format: File tabular `.csv` (Comma Separated Values).
+- Ukuran: Estimasi < 100 KB (terdiri dari ~40 baris data partisipan beserta metrik waktu penyelesaian dan skor SUS/Trust).
 
 ## 4. Execution
-> (Command untuk menjalankan eksperimen)
+1. Distribusikan tautan pengujian Maze kepada partisipan yang telah dikelompokkan (Kelompok Kontrol & Kelompok Perlakuan).
+2. Setelah terkumpul 40 respons, ekspor data dari Maze dan Google Forms menjadi satu file bernama `dataset_eksperimen.csv`.
+3. Buka tautan Google Colab yang memuat skrip `dark_pattern_analysis.ipynb`.
+4. Unggah file `dataset_eksperimen.csv` ke dalam direktori kerja Colab.
+5. Jalankan seluruh baris kode dengan menekan menu `Runtime -> Run all`.
 
 ## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+Konfigurasi parameter dikunci pada bagian awal skrip analisis data Python:
+- `random_seed`: 42 (untuk menstabilkan pembersihan data outlier)
+- `alpha_threshold`: 0.05 (batas signifikansi p-value)
+- `group_a_label`: "Baseline (Normal)"
+- `group_b_label`: "Dark Pattern (Fake Timer)"
 
 ## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+Skrip akan mengeluarkan ringkasan statistik deskriptif berupa rata-rata skor SUS dan Trust Scale dari kedua kelompok. Selanjutnya, skrip akan menampilkan hasil uji Mann-Whitney U Test (berupa nilai statistik *U* dan *p-value*). Jika *p-value* < 0.05, layar akan mencetak string: "H1 Diterima: Terdapat penurunan skor yang signifikan akibat Dark Pattern."
 ```
 
 ---
@@ -172,6 +195,6 @@ Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [x] Belum keduanya
 **Komponen yang belum terdokumentasi:**
-> ___________________________________________________
+> Saat ini, rancangan riset baru berada pada tahap finalisasi proposal, sehingga instrumen pengujian sesungguhnya belum dibangun. Komponen krusial yang masih hilang meliputi: tautan purwarupa Figma interaktif, formulir kuesioner yang sudah disebarkan, serta draf script analisis data Python (berkas .ipynb) yang sesungguhnya. Untuk mencapai tingkat reproducibility, seluruh aset desain, file kuesioner, dan baris kode harus sudah rampung dibuat, diuji coba (pilot test), lalu diunggah secara publik ke dalam repositori GitHub agar peneliti lain dapat mereplikasi prosedur eksperimen ini dari awal hingga akhir.
