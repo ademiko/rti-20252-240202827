@@ -26,7 +26,15 @@ Etika mencegah distorsi yang disengaja (fabrikasi, cherry-picking). Validitas me
 
 ### Paradigma Riset
 
-Mata kuliah ini menggunakan pendekatan **Positivist** (fenomena TI bisa diukur objektif melalui eksperimen terkontrol) diperkuat **Design Science Research** (artefak dibuat sebagai instrumen pengujian hipotesis, bukan tujuan akhir).
+Mata kuliah ini menggunakan pendekatan **Positivist** (fenomena TI bisa diukur objektif melalui eksperimen terkontrol) diperkuat **Design Science Research** (DSR). Penting untuk membedakan keduanya:
+
+| Paradigma | Cara Kerja | Contoh di TI |
+|-----------|-----------|---------------|
+| **Positivis** | Uji hipotesis dengan eksperimen terkontrol | Apakah CNN lebih akurat dari RF pada dataset X? |
+| **Design Science Research** | Bangun artefak (sistem/model/framework) untuk menguji proposisi | Dapatkah arsitektur hybrid CNN+LSTM membuktikan peningkatan recall ≥5%? |
+| **Interpretivis** | Pahami makna melalui konteks & kualitatif | Bagaimana peneliti manafsirkan anomali data sensor IoT? |
+
+Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasilkan pengetahuan. Pertanyaan riset tetap harus difalsifikasi.
 
 ### Mode Berpikir Peneliti
 
@@ -89,9 +97,13 @@ Tanggal          : 4 April 2026
 
 Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
 
+> **Panduan pencarian paper:** Gunakan [IEEE Xplore](https://ieeexplore.ieee.org), [ACM Digital Library](https://dl.acm.org), atau Google Scholar. Pilih paper **tahun 2020 ke atas**, di topik yang Anda minati: deteksi anomali, klasifikasi citra, NLP, keamanan siber, IoT, dsb.
+>
+> **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
+
 **Paper yang dipilih:**
-> Judul: Analisis Perbandingan Algoritma Genetika dan Modified Improved Particle Swarm Optimization dalam Penjadwalan Mata Kuliah
-> Penulis (Tahun): Made Hanindia Prami Swari, Chrystia Aji Putra, I Putu Susila Handika, 2022 
+> Judul: _______________________________________________
+> Penulis (Tahun): ______________________________________
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
@@ -125,13 +137,13 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** Pengujian algoritma (Genetika vs MIPSO)
+**Topik riset:** ________________________________________
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *4* | *1* | *5* |
-| Jenis data yang dikumpulkan | Data kuantitatif berupa rata-rata waktu eksekusi dalam detik.|Tidak mengumpulkan data kualitatif mengenai persepsi atau makna sosial | Evaluasi kinerja artefak (sistem) dalam menghasilkan jadwal tanpa bentrok (fitness = 1).|
-| Limitasi paradigma | Kurang mempertimbangkan kenyamanan subjektif dosen dalam jadwal yang dihasilkan|Tidak dapat memberikan bukti empiris mengenai efisiensi algoritma secara komputasi. | Fokus lebih besar pada keberhasilan solusi teknis daripada pengembangan teori murni|
+| Kesesuaian dengan topik (1–5) | *Contoh: 4* | *Contoh: 2* | *Contoh: 5* |
+| Jenis data yang dikumpulkan | | | |
+| Limitasi paradigma | | | |
 
 **Paradigma yang dipilih:** Design Science Research (DSR)
 **Alasan:** Penelitian ini bertujuan utama untuk menciptakan sebuah artefak teknologi berupa sistem penjadwalan otomatis berbasis web menggunakan framework Laravel. Riset ini mengikuti pola DSR di mana sebuah masalah praktis di dunia nyata (penjadwalan manual yang rumit di UPN "Veteran" Jawa Timur) diselesaikan dengan membangun dan menguji efektivitas sebuah solusi teknis. Pengujian algoritma (Genetika vs MIPSO) dilakukan untuk memvalidasi kinerja dari artefak yang dibangun tersebut agar memberikan rekomendasi terbaik bagi pengelola.

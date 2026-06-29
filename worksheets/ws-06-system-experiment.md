@@ -43,6 +43,19 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 - **Configuration-driven** — Ubah config (YAML/JSON), bukan code
 - **Feature toggles** — On/off flag untuk ablation study
 
+  Contoh config YAML dengan feature toggles:
+  ```yaml
+  model:
+    type: cnn          # IV: ganti "rf" untuk kondisi baseline
+  features:
+    use_temporal: true  # toggle komponen temporal
+    use_normalization: true  # toggle preprocessing
+  experiment:
+    seed: 42
+    runs: 5
+  ```
+  Dengan pendekatan ini, berbeda kondisi eksperimen = berbeda satu baris config, **tanpa mengubah kode**.
+
 ### Research vs Engineering
 
 | Aspek | Engineering | Research |
@@ -129,6 +142,10 @@ Evaluasi desain sistem terhadap 4 prinsip.
 Jika sistem memiliki 3 komponen utama,(dalam konteks Urgency Dark Pattern), rencanakan ablation study untuk melihat elemen mana yang paling manipulatif.
 
 | Kondisi | Komponen A (Fake Timer) | Komponen B (Low Stock Warning) | Komponen C (Social Proof/Activity) | Hasil yang Diharapkan |
+> **Panduan jumlah kondisi:** Untuk 3 komponen (A, B, C), kondisi minimal yang direkomendasikan:
+> Full + (-A) + (-B) + (-C) = **4 kondisi dasar**. Jika waktu memungkinkan, tambahkan kombinasi ganda: (-A,-B), (-A,-C), (-B,-C) = **7 kondisi**. Sesuaikan dengan *computational cost* dan tenggat waktu penelitian.
+
+| Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
 | Full | ✅ aktif | ✅ aktif | ✅ aktif| Penurunan skor SUS dan Kepercayaan paling parah (Baseline) |
 | – A | ❌ dinonaktifkan | ✅ aktif | ✅ aktif | Melihat apakah tanpa tekanan waktu, pengguna menjadi lebih logis. |
