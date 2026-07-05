@@ -100,15 +100,14 @@ Verifikasi apakah semua data yang direncanakan sudah terkumpul.
 
 | Skenario | Run Direncanakan | Run Tercatat | Missing | Alasan |
 |----------|-----------------|-------------|---------|--------|
-| *Contoh: BERT, DS-1* | *10* | *10* | *0* | *—* |
-| *LSTM, DS-3* | *10* | *8* | *2* | *OOM pada run 7 & 9* |
-| | | | | |
-| | | | | |
+| KONTROL (Antarmuka Standar) | 35 | 35 | 0 | — |
+| DARK PATTERN (Urgency) | 35 | 35 | 0 | — |
 
-**Total expected:** ____ | **Total actual:** ____ | **Missing:** ____
+
+**Total expected:** 70 | **Total actual:** 70 | **Missing:** 0
 
 **Keputusan untuk data missing:**
-> ___________________________________________________
+> Tidak ada data yang hilang pada dataset final (DATA MENTAH, baris RTI-001 s.d. RTI-070) seluruh field yang direncanakan (demografi, 10 item SUS, 5 item Trust, status Task Selesai) terisi penuh untuk 70 responden. Ini bisa dicapai karena seluruh pertanyaan kuesioner ditandai Required di Google Forms sejak awal (lihat panduan pembuatan form), sehingga responden tidak bisa submit dengan jawaban kosong. Sekiranya di lapangan ada responden yang keluar di tengah jalan, mereka otomatis tidak akan menghasilkan baris data sama sekali (bukan baris dengan kolom kosong)  sesuai protokol drop-out di WS-10.
 
 ---
 
@@ -116,27 +115,34 @@ Verifikasi apakah semua data yang direncanakan sudah terkumpul.
 
 Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 
-**Dataset sampel (atau data Anda sendiri):**
+**Kelompok KONTROL (n=35):**
 
-| Run | Accuracy (%) |
+| Statistik | Nilai |
 |-----|-------------|
-| 1 | *91.2* |
-| 2 | *90.8* |
-| 3 | *91.5* |
-| 4 | *78.3* |
-| 5 | *91.0* |
+|Q1 | 72.5| 
+|Q3 | 82.5 | 
+| IQR| 10.0 | 
+|Batas bawah (Q1 − 1.5×IQR)| 57.5 | 
+|Batas atas (Q3 + 1.5×IQR)| 97.5| 
+|Rentang aktual| data60 – 90Out| 
+|lier terdeteksi| Tidak ada — seluruh nilai (60–90) berada dalam batas [57.5, 97.5]|
 
-**Deteksi outlier:**
-- Q1 = ____ | Q3 = ____ | IQR = ____
-- Batas bawah (Q1 - 1.5×IQR) = ____
-- Batas atas (Q3 + 1.5×IQR) = ____
-- Outlier terdeteksi: ____
+**Kelompok DARK PATTERN (n=35):**
+| Statistik | Nilai |
+|-----|-------------|
+|Q1 |17.5| 
+|Q3 | 27.5| 
+|IQR | 10.0 | 
+| Batas bawah (Q1 − 1.5×IQR)| 2.5| 
+|Batas atas (Q3 + 1.5×IQR)| 42.5| 
+| Rentang aktual data | 10 – 37.5| 
+|Outlier terdeteksi | tidak ada — seluruh nilai (10–37.5) berada dalam batas [2.5, 42.5]|
 
 **Investigasi (untuk setiap outlier):**
 
 | Outlier | Nilai | Kemungkinan Penyebab | Keputusan |
 |---------|-------|---------------------|-----------|
-| *Run 4* | *78.3* | *Contoh: thermal throttling setelah 3 run berturut* | *Re-run dengan cooling interval* |
+| (tidak ditemukan) | - |- | Karena tidak ada nilai di luar pagar IQR pada kedua kelompok, tidak diperlukan investigasi lebih lanjut untuk skor SUS. |
 
 ---
 
@@ -144,12 +150,12 @@ Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 
 Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
-**1. Completeness:** ____% data terkumpul
-**2. Format:** [ ] Konsisten / [ ] Ada inkonsistensi: ____
-**3. Range check (anomali):** ____
-**4. Logic check:** [ ] Parameter sesuai plan / [ ] Ada ketidaksesuaian: ____
+**1. Completeness:** 100% data terkumpul (70/70 responden, tidak ada field kosong)
+**2. Format:** [x] Konsisten / [ ]  Ada inkonsistensi: ____ ,  seluruh data berada dalam satu file Excel (dataset_penelitian_RTI), sheet DATA MENTAH, dengan header dan tipe kolom yang seragam untuk seluruh 70 baris.
+**3. Range check (anomali):** Tidak ditemukan outlier pada skor SUS maupun Trust berdasarkan metode IQR (lihat Latihan 2). Seluruh nilai item mentah SUS/Trust berada dalam rentang valid 1–5, dan skor komposit SUS dalam rentang valid 0–100.
+**4. Logic check:** [x] Parameter sesuai plan / [ ] Ada ketidaksesuaian: ____, Tidak ditemukan outlier pada skor SUS maupun Trust berdasarkan metode IQR (lihat Latihan 2). Seluruh nilai item mentah SUS/Trust berada dalam rentang valid 1–5, dan skor komposit SUS dalam rentang valid 0–100.
 
-**Kesimpulan:** [ ] Data siap analisis / [ ] Perlu tindakan: ____
+**Kesimpulan:** [x] Data siap analisis / [ ] Perlu tindakan: ____
 
 ---
 
@@ -157,5 +163,6 @@ Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
 > Apa perbedaan antara "data yang benar" dan "data yang dipercaya"? Mengapa proses validasi formal diperlukan meskipun data dikumpulkan secara otomatis?
 
-> ___________________________________________________
-> ___________________________________________________
+> "Data yang benar" hanya berarti nilai tersebut memang persis seperti yang diklik/diketik responden di form — secara teknis akurat sebagai rekaman kejadian. Tapi itu belum tentu "data yang dipercaya", karena bisa saja responden mengklik asal (straight-lining), mengisi dalam waktu terlalu singkat untuk benar-benar membaca pernyataan, atau ada baris yang salah label kelompok akibat kesalahan penggabungan sheet Form A dan Form B. "Dipercaya" berarti data itu sudah melewati pemeriksaan bahwa ia benar-benar merepresentasikan pengalaman nyata partisipan sesuai desain eksperimen, bukan sekadar tercatat secara teknis.
+
+> Proses validasi formal tetap wajib meskipun Google Forms mengumpulkan data secara otomatis, karena otomatisasi hanya menjamin data tersimpan dengan rapi — ia tidak menjamin data itu valid secara substansi. Formulir otomatis tidak bisa mendeteksi bahwa seseorang menjawab tanpa membaca, atau bahwa satu baris tertukar kelompok saat penggabungan manual ke Excel. Karena itu, langkah completeness check, IQR, dan logic check pada worksheet ini tetap saya lakukan sebagai lapisan kepercayaan tambahan sebelum data ini dipakai untuk uji Mann-Whitney U di WS-14.
