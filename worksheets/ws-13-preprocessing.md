@@ -103,14 +103,13 @@ Periksa dataset Anda (atau dataset contoh) dan dokumentasikan masalah yang ditem
 
 | Masalah | Jumlah Kasus | Penanganan | Justifikasi |
 |---------|-------------|------------|-------------|
-| *Contoh: Missing di kolom "label"* | *12 dari 500 (2.4%)* | *Listwise deletion* | *< 5%, distribusi random (MCAR)* |
-| | | | |
-| | | | |
-| | | | |
+|Missing values | 0 dari 70 (0%) | Tidak ada tindakan diperlukan| Seluruh pertanyaan Google Forms ditandai Required, sehingga tidak ada respons kosong sejak sumbernya (lihat WS-10, WS-11).| 
+|Duplikat| 0 dari 70 (0%) — dicek berdasarkan kombinasi ID Responden yang unik (RTI-001 s.d. RTI-070)| Tidak ada tindakan diperlukan, tapi tetap diverifikasi dengan cek COUNTIF pada kolom ID Responden di Excel | Google Forms tidak mengizinkan pengaturan "1 respons per akun" diaktifkan (form dibuat anonim), sehingga verifikasi manual duplikat ID tetap wajib dilakukan, bukan diasumsikan otomatis unik.|
+|Error format | 0 dari 70 (0%) — seluruh kolom numerik (SUS1–10, T1–5, Usia) sudah bertipe angka, bukan teks | Tidak ada tindakan diperlukan | Google Forms untuk item Likert menggunakan tipe Linear scale, yang secara otomatis menghasilkan nilai numerik saat diekspor ke Sheets, sehingga risiko error tipe data (angka tersimpan sebagai teks) minim.|
 
-**Jumlah data sebelum cleaning:** ____
-**Jumlah data setelah cleaning:** ____
-**Persentase data yang hilang/berubah:** ____%
+**Jumlah data sebelum cleaning:** 70
+**Jumlah data setelah cleaning:** 70
+**Persentase data yang hilang/berubah:** 0%
 
 ---
 
@@ -120,16 +119,16 @@ Tentukan apakah data Anda perlu normalisasi, dan jika ya, metode apa yang tepat.
 
 | Variabel | Range Asli | Distribusi | Outlier? | Metode Normalisasi | Alasan |
 |----------|-----------|-----------|----------|-------------------|--------|
-| *Contoh: response_time* | *0.1 – 45.2s* | *Right-skewed* | *Ya (45.2s)* | *Robust scaling* | *Ada outlier, perlu robust* || *Contoh: accuracy_score* | *0.72 – 0.95* | *Normal, narrow* | *Tidak* | *Tidak perlu* | *Sudah dalam [0,1], metode berbasis distance tidak digunakan* || | | | | | |
-| | | | | | |
+| Total SUS |10 – 90 |Dua puncak terpisah jauh (Kontrol ~77, DP ~22.5) — bimodal karena memang dua kelompok berbeda, bukan satu populasi homogen | Tidak | Tidak perlu |Tidak perlu|
+| Rata-rata Trus | 1.4 – 4.6 | Mendekati normal di masing-masing kelompok, tidak ada outlier | Tidak | Tidak perlu | Skala Likert 1–5 sudah dalam rentang tetap dan ordinal secara desain; uji Mann-Whitney U yang direncanakan (WS-07, WS-14) bekerja pada peringkat (rank), bukan jarak absolut, sehingga normalisasi tidak memberi manfaat tambahan. |
 
-**Apakah normalisasi diperlukan?** [ ] Ya / [ ] Tidak
+**Apakah normalisasi diperlukan?** [ ] Ya / [x] Tidak
 **Justifikasi:**
-> ___________________________________________________
+> Kedua DV utama (SUS dan Trust) sudah berada dalam skala baku, terbatas (bounded), dan langsung diinterpretasikan menggunakan norma industri (misalnya skor SUS 77 = "Good", 22.5 = "Awful" ). Uji statistik yang direncanakan, Mann-Whitney U Test, adalah uji non-parametrik berbasis peringkat (rank), sehingga tidak mensyaratkan data dalam skala tertentu atau berdistribusi normal. Menormalisasi data di sini justru melanggar prinsip Minimal Distortion mengubah sesuatu yang tidak perlu diubah hanya akan mempersulit interpretasi tanpa manfaat statistik nyata.
 
 **Leakage check:**
-- [ ] Parameter dihitung dari training set saja
-- [ ] Normalisasi diterapkan setelah train-test split
+- [x] Parameter dihitung dari training set saja
+- [x] Normalisasi diterapkan setelah train-test split
 
 ---
 
@@ -140,16 +139,19 @@ Buat ringkasan preprocessing lengkap — dokumentasi yang cukup bagi orang lain 
 ```
 PREPROCESSING SUMMARY
 
-1. Dataset: ____________________
-2. Data awal: ____ records, ____ features
+1. Dataset: dataset_penelitian_RTI_240202827.xlsx (sheet DATA MENTAH)
+2. Data awal: 70 records, 25 kolom (No, ID, Kelompok, Kondisi, Usia, Jenis Kelamin,
+   Frekuensi Belanja, Task Selesai, SUS1-10, Total SUS, T1-5, Rata2 Trust)
 3. Cleaning:
-   - Missing values: ____ kasus, metode: ____
-   - Duplikat: ____ kasus, tindakan: ____
-   - Error: ____ kasus, tindakan: ____
-4. Transformation: ____________________
-5. Normalisasi: ____ (metode), parameter dari ____
-6. Data akhir: ____ records, ____ features
-7. Leakage check: [ ] Lulus / [ ] Ada masalah
+   - Missing values: 0 kasus, metode: tidak diperlukan (seluruh field Required di Forms)
+   - Duplikat: 0 kasus, tindakan: verifikasi manual ID unik, tidak ada yang dihapus
+   - Error format: 0 kasus, tindakan: tidak diperlukan (tipe data numerik konsisten)
+4. Transformation: Tidak ada transformasi — nilai mentah SUS1-10 dan T1-5 langsung dipakai
+   untuk menghitung Total SUS (formula baku: [(pos-5)+(25-neg)]x2.5) dan Rata-rata Trust
+   (mean T1-5), keduanya sudah disiapkan sebagai formula di spreadsheet sejak awal.
+5. Normalisasi: Tidak diterapkan (lihat justifikasi Latihan 2), parameter dari — (n/a)
+6. Data akhir: 70 records, 25 kolom (identik dengan data awal — tidak ada baris dibuang)
+7. Leakage check: [x] Lulus / [ ] Ada masalah
 ```
 
 ---
@@ -158,5 +160,5 @@ PREPROCESSING SUMMARY
 
 > Apakah Anda pernah melakukan normalisasi "karena biasa dilakukan" tanpa mempertimbangkan apakah benar-benar diperlukan? Apa risiko over-preprocessing?
 
-> ___________________________________________________
-> ___________________________________________________
+> tidak pernah, karena saya tahu nilai SUS dan Trust ini sudah standar internasional dan juga sudah pernah saya pakai pada semester sebelumnya(3)
+
