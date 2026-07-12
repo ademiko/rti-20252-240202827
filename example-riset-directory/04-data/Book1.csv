@@ -1,72 +1,72 @@
 No;ID Responden;Kelompok;Kondisi;prodi;Frekuensi Belanja Online;Task Selesai;SYSTEM USABILITY SCALE (SUS);;;;;;;;;;;TRUST SCALE;;;;;
 ;;;;;;;SUS1;SUS2;SUS3;SUS4;SUS5;SUS6;SUS7;SUS8;SUS9;SUS10;Total SUS;T1;T2;T3;T4;T5;Rata2 Trust
-1;RTI-001;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Tidak;5;1;3;3;4;1;3;1;5;1;82,5;5;5;5;3;5;4,6
+1;RTI-001;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Tidak;5;1;3;3;4;1;3;1;5;1;82.5;5;5;5;3;5;4.6
 2;RTI-002;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;3;3;5;1;5;1;5;3;5;3;80;4;3;4;5;4;4
-3;RTI-003;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;4;1;3;2;3;2;4;3;70;4;3;5;4;5;4,2
-4;RTI-004;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;5;3;4;3;3;3;3;1;5;1;72,5;4;3;3;3;4;3,4
-5;RTI-005;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;4;1;5;2;5;3;5;1;5;3;85;3;5;5;3;3;3,8
-6;RTI-006;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;5;3;5;1;5;2;3;1;3;2;80;4;4;3;3;5;3,8
-7;RTI-007;KONTROL;Antarmuka Standar;ilmu komputer;Jarang (1-3x/bulan);Ya;5;2;3;2;3;1;5;3;5;2;77,5;5;5;4;5;4;4,6
-8;RTI-008;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;3;1;5;1;5;2;5;1;87,5;4;4;5;4;5;4,4
-9;RTI-009;KONTROL;Antarmuka Standar;ilmu komputer;Jarang (1-3x/bulan);Ya;5;2;5;2;3;2;4;1;4;1;82,5;5;5;4;5;3;4,4
-10;RTI-010;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;3;3;5;1;5;2;4;1;3;2;77,5;4;3;3;3;5;3,6
-11;RTI-011;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;5;1;3;3;4;3;3;2;5;3;70;4;3;5;5;5;4,4
-12;RTI-012;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;5;2;4;3;4;1;3;1;3;2;75;3;5;5;3;5;4,2
+3;RTI-003;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;4;1;3;2;3;2;4;3;70;4;3;5;4;5;4.2
+4;RTI-004;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;5;3;4;3;3;3;3;1;5;1;72.5;4;3;3;3;4;3.4
+5;RTI-005;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;4;1;5;2;5;3;5;1;5;3;85;3;5;5;3;3;3.8
+6;RTI-006;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;5;3;5;1;5;2;3;1;3;2;80;4;4;3;3;5;3.8
+7;RTI-007;KONTROL;Antarmuka Standar;ilmu komputer;Jarang (1-3x/bulan);Ya;5;2;3;2;3;1;5;3;5;2;77.5;5;5;4;5;4;4.6
+8;RTI-008;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;3;1;5;1;5;2;5;1;87.5;4;4;5;4;5;4.4
+9;RTI-009;KONTROL;Antarmuka Standar;ilmu komputer;Jarang (1-3x/bulan);Ya;5;2;5;2;3;2;4;1;4;1;82.5;5;5;4;5;3;4.4
+10;RTI-010;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;3;3;5;1;5;2;4;1;3;2;77.5;4;3;3;3;5;3.6
+11;RTI-011;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;5;1;3;3;4;3;3;2;5;3;70;4;3;5;5;5;4.4
+12;RTI-012;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;5;2;4;3;4;1;3;1;3;2;75;3;5;5;3;5;4.2
 13;RTI-013;KONTROL;Antarmuka Standar;ilmu komputer;Sangat sering (> 3x/minggu);Ya;3;1;3;1;4;1;5;1;4;3;80;4;3;5;3;5;4
-14;RTI-014;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;3;1;3;3;4;2;4;2;4;3;67,5;3;5;5;5;3;4,2
-15;RTI-015;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;3;1;5;2;3;2;3;2;72,5;4;3;3;4;5;3,8
-16;RTI-016;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;1;4;2;4;1;4;1;3;2;77,5;3;4;4;4;4;3,8
-17;RTI-017;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Tidak;3;1;5;3;5;1;5;2;3;1;82,5;5;4;5;5;3;4,4
-18;RTI-018;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;3;3;2;3;3;3;3;5;1;62,5;5;3;4;5;5;4,4
+14;RTI-014;KONTROL;Antarmuka Standar;ilmu komputer;Sering (1-3x/minggu);Ya;3;1;3;3;4;2;4;2;4;3;67.5;3;5;5;5;3;4.2
+15;RTI-015;KONTROL;Antarmuka Standar;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;1;3;1;5;2;3;2;3;2;72.5;4;3;3;4;5;3.8
+16;RTI-016;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;1;4;2;4;1;4;1;3;2;77.5;3;4;4;4;4;3.8
+17;RTI-017;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Tidak;3;1;5;3;5;1;5;2;3;1;82.5;5;4;5;5;3;4.4
+18;RTI-018;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;3;3;2;3;3;3;3;5;1;62.5;5;3;4;5;5;4.4
 19;RTI-019;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;4;1;4;2;3;3;5;2;4;2;75;3;3;4;5;5;4
-20;RTI-020;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;2;3;1;4;2;3;2;5;3;70;4;5;5;5;3;4,4
-21;RTI-021;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Tidak;3;3;5;1;4;2;5;1;5;2;82,5;3;5;5;4;5;4,4
-22;RTI-022;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Ya;4;2;3;1;4;1;5;2;3;3;75;4;5;5;4;5;4,6
-23;RTI-023;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Ya;5;1;5;1;4;3;5;1;4;1;90;3;4;4;3;4;3,6
-24;RTI-024;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;5;2;5;3;3;1;3;1;4;1;80;3;5;4;4;5;4,2
-25;RTI-025;KONTROL;Antarmuka Standar;akuntasi ;Sangat jarang (< 1x/bulan);Ya;3;2;3;2;3;1;4;2;4;1;72,5;3;3;5;3;4;3,6
-26;RTI-026;KONTROL;Antarmuka Standar;akuntasi ;Sering (1-3x/minggu);Ya;4;2;5;3;4;3;5;2;3;1;75;4;3;5;4;3;3,8
-27;RTI-027;KONTROL;Antarmuka Standar;akuntasi ;Sangat sering (> 3x/minggu);Tidak;4;2;5;3;3;2;5;1;4;1;80;5;4;3;5;5;4,4
-28;RTI-028;KONTROL;Antarmuka Standar;akuntasi ;Jarang (1-3x/bulan);Ya;5;2;5;2;5;1;5;2;5;2;90;5;4;4;4;5;4,4
-29;RTI-029;KONTROL;Antarmuka Standar;angribisnis ;Sangat sering (> 3x/minggu);Ya;4;3;5;1;5;3;4;2;5;1;82,5;4;4;3;4;5;4
+20;RTI-020;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;3;2;3;1;4;2;3;2;5;3;70;4;5;5;5;3;4.4
+21;RTI-021;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Tidak;3;3;5;1;4;2;5;1;5;2;82.5;3;5;5;4;5;4.4
+22;RTI-022;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Ya;4;2;3;1;4;1;5;2;3;3;75;4;5;5;4;5;4.6
+23;RTI-023;KONTROL;Antarmuka Standar;manajemen;Sangat jarang (< 1x/bulan);Ya;5;1;5;1;4;3;5;1;4;1;90;3;4;4;3;4;3.6
+24;RTI-024;KONTROL;Antarmuka Standar;manajemen;Jarang (1-3x/bulan);Ya;5;2;5;3;3;1;3;1;4;1;80;3;5;4;4;5;4.2
+25;RTI-025;KONTROL;Antarmuka Standar;akuntasi ;Sangat jarang (< 1x/bulan);Ya;3;2;3;2;3;1;4;2;4;1;72.5;3;3;5;3;4;3.6
+26;RTI-026;KONTROL;Antarmuka Standar;akuntasi ;Sering (1-3x/minggu);Ya;4;2;5;3;4;3;5;2;3;1;75;4;3;5;4;3;3.8
+27;RTI-027;KONTROL;Antarmuka Standar;akuntasi ;Sangat sering (> 3x/minggu);Tidak;4;2;5;3;3;2;5;1;4;1;80;5;4;3;5;5;4.4
+28;RTI-028;KONTROL;Antarmuka Standar;akuntasi ;Jarang (1-3x/bulan);Ya;5;2;5;2;5;1;5;2;5;2;90;5;4;4;4;5;4.4
+29;RTI-029;KONTROL;Antarmuka Standar;angribisnis ;Sangat sering (> 3x/minggu);Ya;4;3;5;1;5;3;4;2;5;1;82.5;4;4;3;4;5;4
 30;RTI-030;KONTROL;Antarmuka Standar;angribisnis ;Jarang (1-3x/bulan);Ya;3;3;4;3;3;3;3;2;5;3;60;5;5;4;3;3;4
-31;RTI-031;KONTROL;Antarmuka Standar;angribisnis ;Sangat jarang (< 1x/bulan);Ya;3;1;4;3;3;2;4;3;5;1;72,5;5;5;4;4;4;4,4
-32;RTI-032;KONTROL;Antarmuka Standar;kebidanan ;Sangat sering (> 3x/minggu);Ya;3;2;3;1;5;3;4;1;5;1;80;3;4;3;4;5;3,8
-33;RTI-033;KONTROL;Antarmuka Standar;kebidanan ;Sering (1-3x/minggu);Ya;5;2;3;3;4;2;4;1;5;2;77,5;5;4;5;3;4;4,2
-34;RTI-034;KONTROL;Antarmuka Standar;-;Sangat sering (> 3x/minggu);Tidak;4;2;5;1;3;1;3;2;5;1;82,5;5;3;3;4;4;3,8
-35;RTI-035;KONTROL;Antarmuka Standar;-;Jarang (1-3x/bulan);Ya;4;2;5;3;3;3;4;2;3;2;67,5;4;4;4;5;5;4,4
-36;RTI-036;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Tidak;1;4;3;5;2;5;1;5;3;3;20;3;2;1;2;1;1,8
-37;RTI-037;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Ya;2;4;2;3;1;5;2;5;3;3;25;1;1;1;3;1;1,4
-38;RTI-038;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sering (1-3x/minggu);Ya;1;5;2;5;3;3;2;5;2;5;17,5;2;2;3;1;1;1,8
-39;RTI-039;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Ya;1;3;3;5;1;5;1;4;2;5;15;2;3;1;2;1;1,8
-40;RTI-040;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Tidak;3;4;1;4;2;5;2;3;2;4;25;1;2;2;2;2;1,8
-41;RTI-041;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sering (1-3x/minggu);Ya;2;5;3;5;2;3;2;4;1;5;20;3;2;2;3;3;2,6
-42;RTI-042;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;2;4;1;3;1;5;1;3;2;5;17,5;3;3;3;2;1;2,4
-43;RTI-043;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;1;5;2;3;2;3;2;3;2;4;27,5;2;2;1;1;2;1,6
-44;RTI-044;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;5;1;5;1;3;2;5;1;4;15;2;2;2;3;2;2,2
-45;RTI-045;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;3;4;1;3;3;3;2;5;2;3;32,5;1;2;3;2;3;2,2
+31;RTI-031;KONTROL;Antarmuka Standar;angribisnis ;Sangat jarang (< 1x/bulan);Ya;3;1;4;3;3;2;4;3;5;1;72.5;5;5;4;4;4;4.4
+32;RTI-032;KONTROL;Antarmuka Standar;kebidanan ;Sangat sering (> 3x/minggu);Ya;3;2;3;1;5;3;4;1;5;1;80;3;4;3;4;5;3.8
+33;RTI-033;KONTROL;Antarmuka Standar;kebidanan ;Sering (1-3x/minggu);Ya;5;2;3;3;4;2;4;1;5;2;77.5;5;4;5;3;4;4.2
+34;RTI-034;KONTROL;Antarmuka Standar;-;Sangat sering (> 3x/minggu);Tidak;4;2;5;1;3;1;3;2;5;1;82.5;5;3;3;4;4;3.8
+35;RTI-035;KONTROL;Antarmuka Standar;-;Jarang (1-3x/bulan);Ya;4;2;5;3;3;3;4;2;3;2;67.5;4;4;4;5;5;4.4
+36;RTI-036;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Tidak;1;4;3;5;2;5;1;5;3;3;20;3;2;1;2;1;1.8
+37;RTI-037;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Ya;2;4;2;3;1;5;2;5;3;3;25;1;1;1;3;1;1.4
+38;RTI-038;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sering (1-3x/minggu);Ya;1;5;2;5;3;3;2;5;2;5;17.5;2;2;3;1;1;1.8
+39;RTI-039;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Ya;1;3;3;5;1;5;1;4;2;5;15;2;3;1;2;1;1.8
+40;RTI-040;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Tidak;3;4;1;4;2;5;2;3;2;4;25;1;2;2;2;2;1.8
+41;RTI-041;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sering (1-3x/minggu);Ya;2;5;3;5;2;3;2;4;1;5;20;3;2;2;3;3;2.6
+42;RTI-042;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;2;4;1;3;1;5;1;3;2;5;17.5;3;3;3;2;1;2.4
+43;RTI-043;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;1;5;2;3;2;3;2;3;2;4;27.5;2;2;1;1;2;1.6
+44;RTI-044;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;3;5;1;5;1;3;2;5;1;4;15;2;2;2;3;2;2.2
+45;RTI-045;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;3;4;1;3;3;3;2;5;2;3;32.5;1;2;3;2;3;2.2
 46;RTI-046;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat sering (> 3x/minggu);Ya;3;3;1;3;1;3;1;4;3;4;30;2;1;2;3;2;2
-47;RTI-047;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;1;5;3;3;1;5;1;4;1;4;15;3;3;2;2;1;2,2
+47;RTI-047;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Ya;1;5;3;3;1;5;1;4;1;4;15;3;3;2;2;1;2.2
 48;RTI-048;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Sangat jarang (< 1x/bulan);Tidak;2;5;1;4;2;5;3;4;2;4;20;1;2;3;1;3;2
-49;RTI-049;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;3;5;1;4;1;4;2;3;3;5;22,5;1;2;3;1;3;2
-50;RTI-050;DARK PATTERN;Urgency Dark Pattern;manajemen;Sering (1-3x/minggu);Ya;2;5;2;4;3;4;2;4;1;3;25;3;3;3;1;1;2,2
+49;RTI-049;DARK PATTERN;Urgency Dark Pattern;ilmu komputer;Jarang (1-3x/bulan);Ya;3;5;1;4;1;4;2;3;3;5;22.5;1;2;3;1;3;2
+50;RTI-050;DARK PATTERN;Urgency Dark Pattern;manajemen;Sering (1-3x/minggu);Ya;2;5;2;4;3;4;2;4;1;3;25;3;3;3;1;1;2.2
 51;RTI-051;DARK PATTERN;Urgency Dark Pattern;manajemen;Sangat sering (> 3x/minggu);Tidak;2;4;2;5;2;4;2;4;3;4;25;2;1;3;1;3;2
 52;RTI-052;DARK PATTERN;Urgency Dark Pattern;manajemen;Sering (1-3x/minggu);Tidak;2;4;3;3;1;5;2;4;3;3;30;3;1;2;3;1;2
-53;RTI-053;DARK PATTERN;Urgency Dark Pattern;manajemen;Jarang (1-3x/bulan);Ya;2;3;3;4;3;4;1;3;3;4;35;1;3;1;2;1;1,6
-54;RTI-054;DARK PATTERN;Urgency Dark Pattern;manajemen;Sangat sering (> 3x/minggu);Ya;1;3;2;4;1;4;3;3;1;4;25;3;3;1;2;3;2,4
-55;RTI-055;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sering (1-3x/minggu);Ya;2;3;2;5;1;4;2;4;2;4;22,5;1;2;2;1;1;1,4
-56;RTI-056;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Tidak;1;4;1;5;1;5;2;5;1;3;10;3;2;3;3;3;2,8
-57;RTI-057;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Tidak;1;4;1;4;3;3;1;4;3;3;27,5;2;2;2;3;2;2,2
-58;RTI-058;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Ya;3;5;3;3;1;5;2;5;3;5;22,5;2;3;2;1;3;2,2
-59;RTI-059;DARK PATTERN;Urgency Dark Pattern;agribisnis;Jarang (1-3x/bulan);Ya;2;3;1;4;2;4;1;3;2;3;27,5;1;3;1;2;2;1,8
-60;RTI-060;DARK PATTERN;Urgency Dark Pattern;agribisnis;Jarang (1-3x/bulan);Ya;1;5;2;5;1;4;2;5;3;4;15;1;2;2;1;1;1,4
-61;RTI-061;DARK PATTERN;Urgency Dark Pattern;agribisnis;Sangat jarang (< 1x/bulan);Ya;1;4;1;3;3;5;1;3;1;3;22,5;1;3;2;1;1;1,6
-62;RTI-062;DARK PATTERN;Urgency Dark Pattern;agribisnis;Sangat jarang (< 1x/bulan);Tidak;3;3;2;3;2;3;1;4;3;3;37,5;2;3;1;3;1;2
-63;RTI-063;DARK PATTERN;Urgency Dark Pattern;pgsd ;Sangat sering (> 3x/minggu);Tidak;2;5;2;4;1;5;1;4;3;5;15;3;2;2;3;3;2,6
-64;RTI-064;DARK PATTERN;Urgency Dark Pattern;pgsd ;Sangat jarang (< 1x/bulan);Ya;1;5;3;4;1;4;2;5;2;4;17,5;3;2;2;1;3;2,2
-65;RTI-065;DARK PATTERN;Urgency Dark Pattern;pgsd ;Jarang (1-3x/bulan);Ya;2;5;2;5;3;5;3;4;3;5;22,5;1;2;3;2;2;2
-66;RTI-066;DARK PATTERN;Urgency Dark Pattern;-;Sering (1-3x/minggu);Tidak;1;5;1;5;2;5;3;5;3;5;12,5;2;1;1;2;3;1,8
-67;RTI-067;DARK PATTERN;Urgency Dark Pattern;-;Jarang (1-3x/bulan);Ya;3;4;1;5;1;5;2;4;1;4;15;3;2;3;3;1;2,4
-68;RTI-068;DARK PATTERN;Urgency Dark Pattern;-;Jarang (1-3x/bulan);Ya;3;4;3;4;2;4;3;4;1;5;27,5;3;3;2;3;3;2,8
-69;RTI-069;DARK PATTERN;Urgency Dark Pattern;keperawatan ;Sangat jarang (< 1x/bulan);Ya;1;3;1;4;2;3;3;3;2;5;27,5;1;3;3;3;2;2,4
-70;RTI-070;DARK PATTERN;Urgency Dark Pattern;sistem informasi;Sangat sering (> 3x/minggu);Ya;1;5;3;5;2;3;1;3;2;4;22,5;1;2;1;1;2;1,4
+53;RTI-053;DARK PATTERN;Urgency Dark Pattern;manajemen;Jarang (1-3x/bulan);Ya;2;3;3;4;3;4;1;3;3;4;35;1;3;1;2;1;1.6
+54;RTI-054;DARK PATTERN;Urgency Dark Pattern;manajemen;Sangat sering (> 3x/minggu);Ya;1;3;2;4;1;4;3;3;1;4;25;3;3;1;2;3;2.4
+55;RTI-055;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sering (1-3x/minggu);Ya;2;3;2;5;1;4;2;4;2;4;22.5;1;2;2;1;1;1.4
+56;RTI-056;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Tidak;1;4;1;5;1;5;2;5;1;3;10;3;2;3;3;3;2.8
+57;RTI-057;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Tidak;1;4;1;4;3;3;1;4;3;3;27.5;2;2;2;3;2;2.2
+58;RTI-058;DARK PATTERN;Urgency Dark Pattern;akuntasi ;Sangat jarang (< 1x/bulan);Ya;3;5;3;3;1;5;2;5;3;5;22.5;2;3;2;1;3;2.2
+59;RTI-059;DARK PATTERN;Urgency Dark Pattern;agribisnis;Jarang (1-3x/bulan);Ya;2;3;1;4;2;4;1;3;2;3;27.5;1;3;1;2;2;1.8
+60;RTI-060;DARK PATTERN;Urgency Dark Pattern;agribisnis;Jarang (1-3x/bulan);Ya;1;5;2;5;1;4;2;5;3;4;15;1;2;2;1;1;1.4
+61;RTI-061;DARK PATTERN;Urgency Dark Pattern;agribisnis;Sangat jarang (< 1x/bulan);Ya;1;4;1;3;3;5;1;3;1;3;22.5;1;3;2;1;1;1.6
+62;RTI-062;DARK PATTERN;Urgency Dark Pattern;agribisnis;Sangat jarang (< 1x/bulan);Tidak;3;3;2;3;2;3;1;4;3;3;37.5;2;3;1;3;1;2
+63;RTI-063;DARK PATTERN;Urgency Dark Pattern;pgsd ;Sangat sering (> 3x/minggu);Tidak;2;5;2;4;1;5;1;4;3;5;15;3;2;2;3;3;2.6
+64;RTI-064;DARK PATTERN;Urgency Dark Pattern;pgsd ;Sangat jarang (< 1x/bulan);Ya;1;5;3;4;1;4;2;5;2;4;17.5;3;2;2;1;3;2.2
+65;RTI-065;DARK PATTERN;Urgency Dark Pattern;pgsd ;Jarang (1-3x/bulan);Ya;2;5;2;5;3;5;3;4;3;5;22.5;1;2;3;2;2;2
+66;RTI-066;DARK PATTERN;Urgency Dark Pattern;-;Sering (1-3x/minggu);Tidak;1;5;1;5;2;5;3;5;3;5;12.5;2;1;1;2;3;1.8
+67;RTI-067;DARK PATTERN;Urgency Dark Pattern;-;Jarang (1-3x/bulan);Ya;3;4;1;5;1;5;2;4;1;4;15;3;2;3;3;1;2.4
+68;RTI-068;DARK PATTERN;Urgency Dark Pattern;-;Jarang (1-3x/bulan);Ya;3;4;3;4;2;4;3;4;1;5;27.5;3;3;2;3;3;2.8
+69;RTI-069;DARK PATTERN;Urgency Dark Pattern;keperawatan ;Sangat jarang (< 1x/bulan);Ya;1;3;1;4;2;3;3;3;2;5;27.5;1;3;3;3;2;2.4
+70;RTI-070;DARK PATTERN;Urgency Dark Pattern;sistem informasi;Sangat sering (> 3x/minggu);Ya;1;5;3;5;2;3;1;3;2;4;22.5;1;2;1;1;2;1.4
