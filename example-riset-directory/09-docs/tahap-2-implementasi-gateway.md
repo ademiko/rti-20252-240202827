@@ -1,39 +1,46 @@
-# Tahap 2 — Implementasi API Gateway (Go)
+# Tahap 2 — Implementasi Purwarupa (Figma) & Kuesioner
 
 **Status:** Selesai
-**Acuan arsitektur:** [tahap-1-arsitektur-dan-skema-database.md](tahap-1-arsitektur-dan-skema-database.md)
-**Lokasi kode:** [../05-kode/gateway/](../05-kode/gateway/)
+**Acuan arsitektur:** [tahap-1-perancangan-eksperimen.md](tahap-1-perancangan-eksperimen.md)
+**Lokasi kode:** [../05-kode/uipenelitian/](../05-kode/uipenelitian/)
+**Tautan purwarupa (Figma):** https://www.figma.com/design/BERX4d1E8MyYA2Y6sLjpB6/helloPet?node-id=435-510 
 
 ---
 
 ## Tujuan
 
-Mengimplementasikan API Gateway (Go + Echo) yang mendukung dua mode operasi melalui `CACHE_MODE`:
+Mengimplementasikan dua purwarupa *High-Fidelity* aplikasi e-commerce (Figma) yang mendukung dua kondisi eksperimen melalui alur *routing* Maze:
 
-- `none` — baseline, setiap request langsung query `signing_keys` di PostgreSQL.
-- `hybrid` — mitigasi penuh: Redis L1 cache (positive/negative) + rate-limit counter permanen di PostgreSQL.
+- **Purwarupa A (Kontrol)** — antarmuka standar, bersih, tanpa elemen tekanan waktu.
+- **Purwarupa B (Perlakuan)** — antarmuka identik dengan Purwarupa A, ditambah satu titik intervensi *Urgency Dark Pattern* pada alur pembatalan pesanan.
 
 ## Deliverable
 
-- [x] Struktur project Go (`cmd/gateway`, `internal/...`) — DDD-lite per bounded-context (`jwks`, `ratelimit`, `jwtauth`, `httpapi`, `platform`, `metrics`)
-- [x] `docker-compose.yml` (gateway, postgres, redis) dengan healthcheck & `depends_on: condition: service_healthy`
-- [x] Migration SQL via Sqitch (`signing_keys`, `rate_limit_counters`, `upsert_rate_limit_counter` function)
-- [x] Skrip seed (`scripts/seed`): generate RSA-2048 keypair, insert ke `signing_keys`, cetak contoh JWT valid (exp +24h)
-- [x] Middleware verifikasi JWT (RS256) + resolusi `kid` (mode `none` dan `hybrid`, fail-closed pada Postgres down, fail-open pada Redis down)
-- [x] Endpoint `/metrics` (Prometheus, prefix `jwksgw_`): cache hit/miss, db query count, rate-limit blocked count, auth outcome, request duration
-- [x] Konfigurasi via environment variable (`.env.example`)
-- [x] `/healthz` (dipakai healthcheck compose & runner Tahap 3)
-- [x] `README.md` dengan command mentah (sqitch deploy, seed, run, docker compose, switch `CACHE_MODE`)
+- [x] Struktur file Figma per fungsi halaman (katalog produk, keranjang, checkout, pengaturan akun/pesanan) — komponen & *design system* (warna, tipografi, ikon *bottom bar*: beranda/pencarian/keranjang/profil) dikunci sama persis di kedua purwarupa
+- [x] Purwarupa A — alur pembatalan pesanan: profil → pesanan → "Batalkan Pesanan" → pop-up konfirmasi netral ("Apakah Anda yakin ingin membatalkan?") → "Ya" → selesai
+- [x] Purwarupa B — titik intervensi tunggal pada langkah konfirmasi: pop-up pencegatan berisi *fake countdown timer* statis (`02:59`), teks *loss aversion* (peringatan voucher gratis ongkir hangus), dan tombol asimetris (tombol "Kembali" besar/terang vs "Tetap Batalkan" kecil/abu-abu pudar)
+- [x] Integrasi kedua purwarupa ke **Maze** sebagai platform *unmoderated usability testing* — satu skenario tugas identik ("temukan pengaturan pesanan, lalu batalkan pesanan") di-*assign* ke partisipan sesuai kelompok
+- [x] Pengaturan *random assignment*: tautan uji terpisah per kondisi (Kontrol/Perlakuan) sehingga partisipan otomatis masuk ke satu purwarupa saja, tanpa tahu ada varian lain
+- [x] Kuesioner **Google Forms** (SUS 10 item + Trust Scale) terpasang otomatis di akhir sesi Maze — wajib diisi sebelum sesi dianggap selesai
+- [x] *Pre-filled field* "kelompok" pada Google Forms berbeda per tautan kondisi, agar label `KONTROL` / `DARK PATTERN` terisi otomatis (menghindari *human error* self-report partisipan)
+- [x] Dokumentasi alur pengujian & tautan akses di [../05-kode/uipenelitian/README.md](../05-kode/uipenelitian/README.md)
 
 ## Hasil Verifikasi End-to-End
 
-Diverifikasi manual via `docker compose` + curl (lihat [../05-kode/gateway/README.md](../05-kode/gateway/README.md) bagian "Verifikasi end-to-end"):
+Diverifikasi manual melalui *dry-run* internal (beberapa sesi uji coba sebelum distribusi ke 70 responden):
 
-- **Hybrid**: valid kid → 200 (cache miss → DB → fill cache) → 200 (cache hit); unknown kid → 401 `invalid_kid` (negative cache) tanpa query DB berulang; flood concurrent dengan `kid` unik → sebagian `429 rate_limited` setelah >20 req/s per `client_ip`.
-- **None**: valid kid selalu 200 dengan `jwksgw_db_queries_total{resolve_key}` naik 1:1 per request; tidak pernah `429`.
-- **Fail-closed**: Postgres down → `503 service_unavailable` (kedua mode). Redis down (hybrid) → kid yang sudah ter-cache tetap `200` (fallback Postgres), `/healthz` melaporkan `redis:false`.
+- **Purwarupa A (Kontrol)**: partisipan uji coba dapat menyelesaikan skenario tanpa hambatan; Maze mencatat `task_success = 1` dan durasi navigasi wajar (tanpa jeda akibat elemen pengecoh).
+- **Purwarupa B (Perlakuan)**: pop-up intervensi tampil konsisten di setiap sesi; *countdown* `02:59` bersifat statis (bukan berjalan mundur secara real-time) — cukup untuk memicu persepsi keterdesakan tanpa memerlukan logika timer dinamis di Figma. Beberapa sesi uji coba tercatat `misclick` pada tombol "Kembali" (sesuai desain visual asimetris yang disengaja).
+- **Routing Maze → Google Forms**: partisipan yang menyelesaikan maupun yang meninggalkan tugas di tengah jalan tetap diarahkan ke kuesioner; kolom `kelompok` pada hasil ekspor sesuai dengan tautan yang diakses (tidak ada baris tercampur antar kelompok).
+- **Struktur kolom hasil ekspor** dicek manual terhadap skema Tahap 1 (`participant_id`, `kelompok`, item `SUS_1..SUS_10`, `Trust_1..Trust_n`, dst.) — sudah sesuai dan siap ditarik ke Google Colab pada Tahap 3/4.
 
 ## Catatan Lingkungan
 
-- PostgreSQL container di-expose ke host pada port **5433** (bukan 5432) untuk menghindari konflik dengan instance PostgreSQL lokal di mesin development. Di dalam jaringan Docker, gateway tetap mengakses `postgres:5432`.
-- Sqitch project (`migrations/`) adalah dokumentasi migrasi resmi (deploy/revert/verify), namun di mesin development saat ini `sqitch` CLI tidak punya driver `DBD::Pg` — migrasi diverifikasi dengan menjalankan file `deploy/*.sql` langsung via `psql`. Pastikan environment dengan `DBD::Pg` terpasang untuk `sqitch deploy` penuh.
+- Purwarupa Figma diakses via tautan publik mode *Present* (izin *view-only*); partisipan tidak memerlukan akun Figma untuk membuka atau berinteraksi dengan simulasi.
+- Maze berjalan pada tingkat langganan (*tier*) dengan kuota sesi terbatas — distribusi ke 70 responden dijadwalkan bertahap agar tidak melebihi kuota bulanan.
+- Google Forms tidak mendukung percabangan otomatis berbasis kelompok eksperimen dalam satu formulir tunggal; solusi yang dipakai adalah dua tautan formulir dengan *pre-filled field* `kelompok` berbeda, dipasangkan satu-satu dengan tautan Maze per kondisi — memastikan partisipan tidak perlu mengisi label kelompok secara manual.
+- Elemen manipulatif pada Purwarupa B disengaja dibuat *statis* (bukan animasi dinamis) agar dapat direplikasi identik di setiap sesi pengujian, konsisten dengan prinsip *reproducibility* instrumen penelitian.
+
+---
+
+*Acuan: [../05-kode/README.md](../05-kode/README.md), [../03-teori/README.md](../03-teori/README.md), [tahap-1-perancangan-eksperimen.md](tahap-1-perancangan-eksperimen.md).*
