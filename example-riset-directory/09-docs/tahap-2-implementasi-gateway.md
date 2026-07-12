@@ -3,7 +3,7 @@
 **Status:** Selesai
 **Acuan arsitektur:** [tahap-1-perancangan-eksperimen.md](tahap-1-perancangan-eksperimen.md)
 **Lokasi kode:** [../05-kode/uipenelitian/](../05-kode/uipenelitian/)
-**Tautan purwarupa (Figma):** https://www.figma.com/design/BERX4d1E8MyYA2Y6sLjpB6/helloPet?node-id=435-510 
+**Tautan purwarupa (Figma):** https://www.figma.com/design/BERX4d1E8MyYA2Y6sLjpB6/helloPet?node-id=435-510&t=zjnzdos0mnJRcUrA-1 
 
 ---
 
