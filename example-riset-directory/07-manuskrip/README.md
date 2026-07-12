@@ -1,6 +1,6 @@
 # 07-manuskrip: Draf Naskah Ilmiah (Extended Outline)
 
-Draf naskah ilmiah ini disusun sebagai kerangka konsolidasi riset komparatif antarmuka pengguna untuk memenuhi luaran **Tahap 5**. Poin-poin di bawah ini merangkum esensi yang akan dikembangkan menjadi naskah artikel ilmiah lengkap (*full paper*) untuk target publikasi jurnal terakreditasi nasional (Sinta 2 - Jurnal RESTI / Telematika) atau prosiding internasional.
+Draf naskah ilmiah ini disusun sebagai kerangka konsolidasi riset komparatif antarmuka pengguna untuk memenuhi luaran **Tahap 5**. Poin-poin di bawah ini merangkum esensi yang akan dikembangkan menjadi naskah artikel ilmiah lengkap (*full paper*) untuk target publikasi jurnal terakreditasi nasional (Sinta 4 - Jurnal JAMI / jurnal ahli muda indonesia) atau prosiding internasional.
 
 ---
 
