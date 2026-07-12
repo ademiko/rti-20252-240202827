@@ -1,25 +1,25 @@
 # Laporan Penelitian
 
-**Judul:** Performance and Security Evaluation of Mitigating JWKS Endpoint Flooding on Microservices Gateway Using Redis-PostgreSQL Hybrid Caching
+**Judul:** Pengaruh Urgency Dark Pattern pada Antarmuka Aplikasi E-Commerce terhadap Tingkat Usability dan Kepercayaan Pengguna
 
-**Peneliti:** Helmi Bahar Alim
-**Target Publikasi:** Sinta 2 (Jurnal RESTI/Telematika) atau Scopus Q3–Q4
-**Status Penelitian:** Tahap 1–4 selesai; Tahap 5 (draf naskah jurnal) sedang berjalan ([../07-manuskrip/](../07-manuskrip/))
+**Peneliti:** Ade Miko (240202827)
+**Target Publikasi:** Sinta 4 (Jurnal JAMI / Jurnal ahli muda indonesia)
+**Status Penelitian:** Tahap 1–5 selesai
 
 ---
 
 ## 1. Ringkasan Eksekutif
 
-Penelitian ini merancang, mengimplementasikan, dan mengevaluasi secara empiris mekanisme **Redis-PostgreSQL Hybrid Caching** sebagai mitigasi kerentanan **JWKS Endpoint Flooding** pada API Gateway berbasis Go (Echo). Evaluasi dilakukan melalui eksperimen terkontrol: satu gateway dengan dua mode operasi (`CACHE_MODE=none` sebagai baseline dan `CACHE_MODE=hybrid` sebagai mitigasi), diuji terhadap 5 varian traffic (legitimate, dua varian serangan, dan dua varian campuran) masing-masing 40 replikasi — total **400 pengujian beban** menggunakan k6, dengan pengukuran latensi, throughput, metrik internal gateway (Prometheus), dan penggunaan resource container (CPU/memori).
+Penelitian ini merancang, mengimplementasikan, dan mengevaluasi secara empiris dampak dari praktik Urgency Dark Pattern terhadap pengalaman pengguna pada aplikasi e-commerce. Evaluasi difokuskan pada penggunaan elemen manipulatif seperti hitung mundur palsu (fake countdown timer) dan confirm-shaming. Pengujian dilakukan melalui eksperimen terkontrol menggunakan metode Between-Subjects A/B Testing. Purwarupa diuji dalam dua kondisi: Kelompok Kontrol dengan antarmuka standar yang netral, dan Kelompok Perlakuan dengan antarmuka manipulatif. Eksperimen melibatkan 70 responden yang dibagi secara acak (35 per kelompok), dengan pengukuran metrik System Usability Scale (SUS) dan Trust Scale.
 
 **Temuan utama:**
 
-- Mitigasi **tidak menambah overhead** pada kondisi normal (latensi hybrid sedikit lebih rendah dari baseline).
-- Mitigasi **menurunkan beban query PostgreSQL sebesar 93,2%–99,997%** dan **CPU PostgreSQL dari 64–154% menjadi <2,5%** pada mayoritas skenario.
-- Mitigasi **melindungi latensi traffic legitimate** saat sistem diserang ($D_{perf}$ p95 = -92,9% pada `mixed-unique`, -39,5% pada `mixed-pool`).
-- Ditemukan **trade-off**: pada pola serangan dengan `kid` selalu baru (`*-unique`), rate-limiting berbasis UPSERT per `client_ip` di PostgreSQL menjadi titik kontensi *lock*, sehingga CPU PostgreSQL tetap tinggi (103–124%) dan latensi traffic penyerang pada mode hybrid justru lebih buruk daripada baseline.
+- Paparan antarmuka manipulatif menurunkan skor Usability (SUS) secara drastis, anjlok dari rata-rata 77,0 (kategori Good) menjadi 22,5 (kategori Awful).
+- Integritas platform mengalami penurunan tajam di mata pengguna, ditandai dengan turunnya skor Trust Scale dari 4,11 menjadi 2,03.
+- Hasil uji statistik non-parametrik (Mann-Whitney U Test) membuktikan bahwa perbedaan skor tersebut sangat signifikan secara statistik (p < 0,001) dengan ukuran efek (effect size) yang sangat besar (r = 0,86). Hal ini membuktikan secara empiris bahwa taktik manipulasi visual secara mutlak membebani kognitif pengguna.
+- Ditemukan batasan riset (trade-off): Mengingat pengujian dilakukan melalui purwarupa simulasi (Figma), ancaman kerugian finansial tidak sepenuhnya nyata bagi responden. Kondisi ini berpotensi membuat effect size yang terukur sedikit lebih besar dibandingkan interaksi organik pada aplikasi sungguhan.
 
-Seluruh kode sumber, data eksperimen, skrip analisis, tabel, dan figure tersedia di repository ini (lihat §7 Lampiran untuk peta artefak).
+Seluruh desain purwarupa, data eksperimen, skrip analisis Python, tabel, dan grafik hasil visualisasi telah diintegrasikan dan tersedia di repositori penelitian.
 
 ---
 
@@ -27,169 +27,112 @@ Seluruh kode sumber, data eksperimen, skrip analisis, tabel, dan figure tersedia
 
 ### 2.1 Latar Belakang
 
-API Gateway pada arsitektur microservices umumnya memvalidasi JSON Web Token (JWT) dengan mengambil kunci publik penandatangan dari *JSON Web Key Set* (JWKS) berdasarkan *Key ID* (`kid`) pada header token. Pada implementasi naif, setiap `kid` yang belum dikenal memicu *lookup* baru ke backing store (database/Identity Service). Penyerang dapat mengeksploitasi pola ini — yang dalam penelitian ini disebut **JWKS Endpoint Flooding** (selaras dengan kelas kerentanan CVE-2026-48524, perlu diverifikasi — lihat [../02-literatur/matriks-literatur.md](../02-literatur/matriks-literatur.md)) — dengan membanjiri gateway menggunakan JWT ber-`kid` acak, sehingga beban *lookup* ke database bertumbuh linear terhadap *request rate* penyerang dan berpotensi menyebabkan *resource exhaustion* yang menurunkan kualitas layanan bagi pengguna sah.
+Persaingan yang semakin ketat dalam industri e-commerce memicu pergeseran pendekatan desain dari yang berpusat pada pengguna (user-centered design) menjadi desain yang cenderung eksploitatif (Dark Pattern). Pengembang platform kerap memanipulasi aspek psikologis pengguna dengan memanfaatkan taktik keterdesakan waktu (Urgency) dan kelangkaan (Scarcity). Praktik ini umumnya diimplementasikan melalui komponen batas waktu diskon palsu yang mengeksploitasi bias kognitif Fear of Missing Out (FOMO). Meskipun taktik ini diklaim mampu mencegah pembatalan transaksi secara instan, penerapannya berisiko tinggi merusak pilar utama dalam interaksi manusia dan komputer (HCI).
 
 ### 2.2 Rumusan Masalah
 
-1. Bagaimana merancang mekanisme caching pada API Gateway yang membatasi dampak JWKS Endpoint Flooding terhadap beban database backend, tanpa menambah latensi signifikan pada traffic legitimate?
-2. Seberapa besar efektivitas skema Redis-PostgreSQL Hybrid Caching (positive cache, negative cache, rate limiting berbasis PostgreSQL) dalam menurunkan beban query database dan penggunaan CPU selama serangan?
-3. Bagaimana dampak ($D_{perf}$) mitigasi terhadap latensi traffic legitimate, baik pada kondisi normal maupun saat berjalan bersamaan dengan traffic serangan?
-4. Apakah strategi serangan `kid` selalu baru (`unique`) vs `kid` berulang dari pool kecil (`pool`) menghasilkan efektivitas dan trade-off mitigasi yang berbeda?
+1. Apakah desain antarmuka e-commerce yang menggunakan trik Urgency Dark Pattern menghasilkan skor usability yang secara signifikan lebih rendah dibandingkan antarmuka standar?
+2. Apakah tingkat kepercayaan pengguna (User Trust) mengalami penurunan yang signifikan akibat intervensi antarmuka manipulatif tersebut?
+3. Seberapa besar efek (besaran dampak) dari tekanan visual palsu terhadap beban kognitif pengguna saat mengeksekusi skenario pembatalan pesanan?
 
 ### 2.3 Tujuan Penelitian
 
-Detail tujuan & kontribusi: lihat [../01-proposal/proposal-penelitian.md](../01-proposal/proposal-penelitian.md) §3 dan §5, serta [../07-manuskrip/02-pendahuluan.md](../07-manuskrip/02-pendahuluan.md).
+Penelitian ini bertujuan untuk mengukur dan membuktikan secara kuantitatif besaran penurunan metrik Usability dan Trust akibat intervensi Dark Pattern. Hasil penelitian ini diharapkan dapat mengisi celah literatur yang selama ini lebih banyak didominasi oleh pendekatan kualitatif, sekaligus memberikan landasan empiris untuk perumusan etika desain UI/UX ke depannya.
 
 ---
 
 ## 3. Metodologi dan Pelaksanaan
 
-Penelitian dilaksanakan dalam 5 tahap. Bagian ini merangkum implementasi dan verifikasi setiap tahap; detail teknis lengkap ada pada dokumen `09-docs/tahap-N-*.md` yang dirujuk.
+Penelitian ini dilaksanakan dalam 5 tahapan yang terstruktur. Berikut adalah rangkuman implementasi dari keseluruhan proses eksperimen.
 
-### 3.1 Tahap 1 — Perancangan Arsitektur & Skema Database
+### 3.1 Tahap 1 — Perancangan Eksperimen & Variabel
+**Status: Selesai.** Pendekatan yang digunakan adalah Between-Subjects A/B Testing. Variabel Independen (IV) ditetapkan sebagai Jenis Antarmuka (Standar vs Dark Pattern). Variabel Dependen (DV) dioperasionalisasikan menjadi metrik System Usability Scale (rentang skor 0-100) dan Trust Scale (skala Likert 1-5). Skenario tugas pengguna (membatalkan langganan) dikunci sebagai Variabel Kontrol (CV) untuk memastikan keadilan pengujian (fairness) bagi kedua kelompok.
 
-**Status: Selesai.** Dirancang arsitektur tiga komponen (Gateway Go/Echo, Redis sebagai L1 cache murni, PostgreSQL sebagai L2/*source of truth*), alur resolusi kunci (positive cache → negative cache → rate-limit PostgreSQL → query `signing_keys`), skema tabel `signing_keys` dan `rate_limit_counters` (dengan *stored procedure* `upsert_rate_limit_counter` untuk UPSERT atomik), dan skema key Redis (`jwks:kid:<kid>`, `jwks:negative:<kid>`). Mode eksperimen `CACHE_MODE=none|hybrid` dirancang sejak tahap ini agar perbandingan baseline-vs-mitigated dapat dilakukan pada infrastruktur identik.
+### 3.2 Tahap 2 — Implementasi Purwarupa
 
-Detail & diagram: [../09-docs/tahap-1-arsitektur-dan-skema-database.md](../09-docs/tahap-1-arsitektur-dan-skema-database.md), [../03-teori/arsitektur-dan-skema.md](../03-teori/arsitektur-dan-skema.md).
+**Status: Selesai.** Instrumen eksperimen dibangun menggunakan arsitektur modular di Figma sebagai antarmuka interaktif, yang diintegrasikan dengan Maze Platform dan Google Forms untuk otomasi perekaman data. Kelompok kontrol dihadapkan pada alur pembatalan yang linear dan netral. Sebaliknya, kelompok perlakuan dicegat oleh pop-up confirm-shaming dan elemen fake timer yang berdetak mundur.
 
-### 3.2 Tahap 2 — Implementasi API Gateway (Go)
+### 3.3 Tahap 3 — Eksekusi & Pengumpulan Data
 
-**Status: Selesai.** Gateway diimplementasikan dengan struktur *clean architecture* per *bounded context* (`internal/jwks`, `internal/ratelimit`, `internal/jwtauth`, `internal/httpapi`, `internal/platform`, `internal/metrics`), menggunakan Echo, `pgx`/`pgxpool`, `go-redis/redis/v9`, `golang-jwt/jwt/v5`, dan `prometheus/client_golang`. Deliverable: migrasi SQL (Sqitch), skrip seed (generate RSA-2048 keypair + sample JWT), middleware verifikasi JWT dengan resolusi `kid` untuk kedua mode, endpoint `/api/resource`, `/healthz`, `/metrics`, serta `docker-compose.yml` dengan healthcheck.
+**Status: Selesai.** Distribusi tautan pengujian dilakukan melalui teknik Random Assignment guna memitigasi bias seleksi (Selection Bias). Pengumpulan data berhasil menjaring 70 partisipan independen (35 perlakuan, 35 kontrol) tanpa adanya insiden data dropout. Keseluruhan data tercatat dalam lembar kerja utama eksperimen.
 
-**Verifikasi end-to-end** (manual via curl, kedua mode):
-- *Hybrid*: kid valid → `200` (cache miss → DB → fill cache → cache hit pada request berikutnya); kid tidak dikenal → `401 invalid_kid` (negative cache, tidak ada query DB berulang); flood concurrent kid unik → sebagian `429 rate_limited` setelah >20 req/detik per `client_ip`.
-- *None*: kid valid selalu `200` dengan `jwksgw_db_queries_total{resolve_key}` naik 1:1 per request; tidak pernah `429`.
-- *Fail-closed/fail-open*: PostgreSQL down → `503` (kedua mode); Redis down (hybrid) → kid ter-cache tetap `200` (fallback PostgreSQL), `/healthz` melaporkan `redis:false`.
+### 3.4 Tahap 4 — Validasi, Ekstraksi & Analisis Data
 
-Catatan lingkungan: PostgreSQL container di-expose ke host pada port 5433 (hindari konflik port lokal); migrasi diverifikasi via `psql` langsung (Sqitch CLI di mesin dev tidak memiliki driver `DBD::Pg`).
-
-Detail: [../09-docs/tahap-2-implementasi-gateway.md](../09-docs/tahap-2-implementasi-gateway.md), kode: [../05-kode/gateway/](../05-kode/gateway/).
-
-### 3.3 Tahap 3 — Pengujian Beban k6
-
-**Status: Selesai — matrix 400 run (40 replikasi) telah dijalankan.** Disusun 3 skrip k6 (`legitimate.js`, `attack.js` dengan `KID_STRATEGY=unique|pool`, `mixed.js` yang menjalankan keduanya secara paralel dengan Trend custom per skenario), runner `run-scenario.sh` (restart gateway sesuai mode, health check, snapshot `/metrics` sebelum/sesudah, jalankan k6, monitor resource), `run-matrix.sh` (loop replikasi × kombinasi mode/varian), dan `monitor-resources.sh` (`docker stats` polling ~3s).
-
-**Iterasi desain penting**: percobaan awal menggunakan `k6 run --out json=...` menghasilkan **139 MB** data mentah hanya untuk 15 detik pengujian — tidak layak untuk matrix penuh. Solusi: ganti ke `--summary-export` (ringkasan agregat) + snapshot `/metrics` gateway before/after (delta = ground truth jumlah query/cache/rate-limit) + Trend custom di `mixed.js`. Hasil: total ukuran matrix awal 50 run **~1,7 MB**.
-
-**Matrix awal (5 replikasi, diarsipkan)**: `CACHE_MODE` ∈ {none, hybrid} × traffic_variant ∈ {legitimate, attack-unique, attack-pool, mixed-unique, mixed-pool} × replikasi 1–5 = **50 run**, dijalankan ~54 menit (2026-06-12T18:05Z–18:59Z), seluruhnya `k6_exit_code = 0`. Dataset ini kemudian diarsipkan ke `04-data/_archive-50run-20260612/`.
-
-**Matrix final (40 replikasi)**: untuk memperbesar sampel statistik, replikasi diperluas menjadi 40 per kombinasi — `CACHE_MODE` ∈ {none, hybrid} × traffic_variant (5 varian) × replikasi 1–40 = **400 run**, dijalankan via `run-matrix.sh` pada 2026-06-15 (selesai `2026-06-15T09:53:24Z`), seluruhnya `k6_exit_code = 0`. Sebelum eksekusi, token JWT legitimate yang sebelumnya *expired* diregenerasi dan cache Redis di-*flush* agar matrix dimulai dari kondisi cache dingin. Dataset 400 run inilah yang menjadi sumber statistik final pada §4.
-
-Output per run: `k6-summary.json`, `gateway-metrics-{before,after}.txt`, `resources.csv`, `meta.json`, disimpan di `04-data/<cache_mode>__<traffic_variant>__rep<N>__<timestamp>/` (tidak disertakan dalam repository git — lihat `.gitignore` — namun seluruh skrip pembangkit tersedia untuk reproduksi).
-
-Detail: [../09-docs/tahap-3-pengujian-k6.md](../09-docs/tahap-3-pengujian-k6.md), kode: [../05-kode/k6/](../05-kode/k6/).
-
-### 3.4 Tahap 4 — Ekstraksi Data & Visualisasi
-
-**Status: Selesai.** Dibangun *pipeline* analisis Python (`05-kode/analysis/`, dijalankan via `python run_all.py`) terdiri dari:
-
-| Modul | Fungsi |
-|---|---|
-| `common.py` | Helper baca artefak `04-data/<run-id>/` (k6 summary, meta, `/metrics`, `resources.csv`) |
-| `load_runs.py` | Bangun DataFrame tidy: ringkasan k6 per run, ringkasan resource, delta `/metrics` gateway |
-| `descriptive_stats.py` | Statistik deskriptif latensi/RPS per (cache_mode, traffic_variant) + breakdown legit vs attack pada mixed |
-| `compute_dperf.py` | Hitung $D_{perf}$ |
-| `resource_stats.py` | CPU%/memori per (cache_mode, traffic_variant, container) |
-| `gateway_metrics.py` | Metrik efektivitas mitigasi dari delta `jwksgw_*` |
-| `charts.py` | 5 figure PNG |
-
-Output: 6 tabel CSV ([../06-output/tables/](../06-output/tables/)) dan 5 figure PNG ([../06-output/figures/](../06-output/figures/)). Detail & hasil: [../09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md).
+**Status: Selesai.** Dataset mentah telah melewati proses Completeness Check dengan tingkat kelengkapan 100% dan deteksi anomali menggunakan metode Interquartile Range (IQR). Tidak ditemukan outlier yang berada di luar ambang batas kewajaran. Transformasi atau normalisasi data tidak dilakukan mengingat pengujian bersifat non-parametrik. Skrip komputasi dieksekusi menggunakan bahasa Python (pustaka Pandas dan SciPy) via Google Colab untuk menjalankan Mann-Whitney U Test.
 
 ### 3.5 Tahap 5 — Draf Naskah Jurnal
 
-**Status: Sedang berjalan.** Draf konten per bagian naskah (Abstrak, Pendahuluan, Tinjauan Pustaka, Metodologi, Hasil & Analisis, Kesimpulan, Daftar Pustaka) telah disusun di [../07-manuskrip/](../07-manuskrip/), siap dipindahkan ke template jurnal tujuan. Bagian yang masih perlu dilengkapi: Tinjauan Pustaka (*related work*, lihat [../02-literatur/matriks-literatur.md](../02-literatur/matriks-literatur.md)), verifikasi nomor CVE, dan keputusan bahasa final naskah.
+**Status: Sedang berjalan.** Naskah ilmiah telah disusun sepenuhnya menggunakan struktur IMRAD (Abstrak, Pendahuluan, Tinjauan Pustaka, Metode, Hasil, Diskusi, Kesimpulan). Matriks konsistensi alur argumen telah diverifikasi secara menyeluruh dan siap untuk proses publikasi.
 
 ---
 
 ## 4. Hasil Penelitian
 
-Ringkasan hasil (detail lengkap & interpretasi: [../07-manuskrip/05-hasil-analisis.md](../07-manuskrip/05-hasil-analisis.md) dan [../09-docs/tahap-4-analisis-data.md](../09-docs/tahap-4-analisis-data.md)).
+## 4. Hasil Penelitian
 
-### 4.1 D_perf — Dampak Mitigasi terhadap Traffic Legitimate
+### 4.1 Statistik Deskriptif
 
-| Kondisi | Metrik | T_none (ms) | T_hybrid (ms) | $D_{perf}$ |
-|---|---|---|---|---|
-| `legitimate` (tanpa serangan) | avg | 0,6905 | 0,6301 | -8,8% |
-| `legitimate` (tanpa serangan) | p95 | 1,0384 | 1,0063 | -3,1% |
-| Traffic legit dalam `mixed-unique` | avg | 10,4183 | 0,7721 | -92,6% |
-| Traffic legit dalam `mixed-unique` | p95 | 19,4384 | 1,3839 | -92,9% |
-| Traffic legit dalam `mixed-pool` | avg | 10,7468 | 5,7595 | -46,4% |
-| Traffic legit dalam `mixed-pool` | p95 | 20,5135 | 12,4138 | -39,5% |
+| Variabel Dependen | KONTROL (Mean ± Std) | DARK PATTERN (Mean ± Std) | Selisih (Delta) |
+| --- | --- | --- | --- |
+| Total SUS (Skor 0-100) | 77,0 ± 7,01 | 22,5 ± 6,50 | **- 54,5 poin** |
+| Rata-rata Trust (Skor 1-5) | 4,11 ± 0,33 | 2,03 ± 0,39 | **- 2,08 poin** |
 
-### 4.2 Penurunan Beban Query PostgreSQL
+### 4.2 Uji Hipotesis (Mann-Whitney U Test)
 
-| traffic_variant | db_queries `none` (mean) | db_queries `hybrid` (mean) | Reduction |
-|---|---|---|---|
-| legitimate | 300.114,7 | 10,0 | 99,997% |
-| attack-unique | 907.845,5 | 61.894,1 | 93,182% |
-| attack-pool | 879.271,7 | 73,1 | 99,992% |
-| mixed-unique | 880.678,3 | 57.957,1 | 93,419% |
-| mixed-pool | 849.226,3 | 74,6 | 99,991% |
+| Metrik | U-Statistic | Z-Score | p-value | Effect Size (r) | Keputusan |
+| --- | --- | --- | --- | --- | --- |
+| Usability (SUS) | 1225,0 | 7,19 | **0,00000** | 0,86 | H1 Diterima |
+| User Trust | 1225,0 | 7,19 | **0,00000** | 0,86 | H1 Diterima |
 
-### 4.3 Penggunaan CPU PostgreSQL
+### 4.3 Visualisasi Data
 
-| traffic_variant | CPU postgres `none` (mean%) | CPU postgres `hybrid` (mean%) |
-|---|---|---|
-| legitimate | 64,1 | 2,2 |
-| attack-unique | 158,3 | 124,4 |
-| attack-pool | 153,9 | 2,2 |
-| mixed-unique | 152,5 | 103,0 |
-| mixed-pool | 149,9 | 2,2 |
+| File | Deskripsi Visualisasi |
+| --- | --- |
+| `fig_sus_boxplot.png` | *Boxplot chart* distribusi skor SUS, menunjukkan pemisahan ekstrem tanpa adanya tumpang tindih data antara kelompok Kontrol dan *Dark Pattern*. |
+| `fig_trust_boxplot.png` | *Boxplot chart* yang mengilustrasikan anjloknya variansi dan median skor Kepercayaan Pengguna (*Trust Scale*). |
+| `fig_task_completion_bar.png` | *Bar chart* persentase rasio keberhasilan navigasi responden (*Task Selesai*). |
 
-### 4.4 Figure
+### 4.4 Interpretasi Hasil
 
-| File | Isi |
-|---|---|
-| [`fig_latency_p95.png`](../06-output/figures/fig_latency_p95.png) | Latensi p95 per traffic_variant: none vs hybrid |
-| [`fig_dperf.png`](../06-output/figures/fig_dperf.png) | $D_{perf}$ (avg & p95) untuk 3 perbandingan |
-| [`fig_db_queries_reduction.png`](../06-output/figures/fig_db_queries_reduction.png) | Total query PostgreSQL per run (log scale) |
-| [`fig_postgres_cpu.png`](../06-output/figures/fig_postgres_cpu.png) | CPU% rata-rata container PostgreSQL |
-| [`fig_resource_timeseries.png`](../06-output/figures/fig_resource_timeseries.png) | Time-series CPU PostgreSQL selama `mixed-pool` rep1 |
-
-### 4.5 Interpretasi Singkat
-
-1. Mitigasi tidak menambah overhead pada kondisi normal — bahkan sedikit lebih cepat (positive cache hit ratio ≈ 99,997%).
-2. Mitigasi melindungi pengalaman pengguna sah secara signifikan saat sistem diserang (D_perf p95 hingga -92,9%).
-3. Reduction beban query PostgreSQL 93,2%–99,997% dan CPU PostgreSQL turun ke <2,5% pada skenario `legitimate`, `attack-pool`, `mixed-pool`.
-4. **Trade-off**: pada `*-unique`, rate-limiting berbasis UPSERT per `client_ip` menjadi titik kontensi *lock* — CPU PostgreSQL hybrid tetap 103–124% dan latensi traffic penyerang pada hybrid lebih buruk dibanding `none`. Traffic legitimate tetap terlindungi.
+1. Manipulasi visual secara radikal menurunkan tingkat kenyamanan pengguna. Skor SUS anjlok drastis dari rentang yang dapat diterima menjadi kategori kegagalan antarmuka (*Awful*).
+2. Taktik *confirm-shaming* dan batas waktu palsu memicu *backfire effect*. Pengguna modern secara proaktif menyadari adanya niat buruk (*malicious intent*) dari platform, yang berujung pada runtuhnya kepercayaan secara absolut (p-value < 0,001).
+3. Nilai *Effect Size* yang tercatat (r = 0,86) masuk dalam kategori sangat besar (*Large*), menegaskan bahwa desain antarmuka manipulatif merupakan faktor kausalitas utama yang memicu beban kognitif pada responden.
 
 ---
 
-## 5. Kendala dan Catatan Lingkungan
+## 5. Evaluasi Keterbatasan (Failure Analysis)
 
-- **Output k6 mentah (`--out json=`) tidak skalabel** (139 MB/15s) — diatasi dengan `--summary-export` + snapshot `/metrics` + Trend custom (lihat §3.3).
-- **Direktori run data kadang terkunci sementara** (`Device or resource busy`) pada Windows/Docker Desktop setelah `docker run --rm` dengan bind mount — transient, hilang sendiri setelah beberapa saat, tidak memerlukan penanganan kode.
-- **`MSYS_NO_PATHCONV=1`** diperlukan pada `docker run` via Git Bash (Windows) agar path container tidak diterjemahkan ke path Windows oleh MSYS.
-- **Sqitch CLI** di mesin development tidak memiliki driver `DBD::Pg` — migrasi diverifikasi via `psql` langsung; `migrations/` tetap menjadi dokumentasi resmi deploy/revert/verify.
-- **PostgreSQL container** di-expose pada port 5433 (bukan 5432 default) untuk menghindari konflik dengan instance PostgreSQL lokal.
+- **Ancaman External Validity:** Eksperimen ini dioperasikan pada lingkungan simulasi berbasis purwarupa Figma. Walaupun desain dibuat menyerupai aplikasi sungguhan (*High-Fidelity*), responden menyadari bahwa tidak ada transaksi finansial nyata yang terlibat. Kondisi psikologis ini berpotensi menjadikan *effect size* yang terukur sedikit lebih besar (*overestimate*) dibandingkan dampak aktual pada aplikasi *e-commerce* komersial.
+- **Deteksi Durasi Interaksi:** Pengukuran durasi navigasi (*Task Completion Time*) secara *native* di dalam Figma memiliki keterbatasan akurasi. Sebagai langkah kompensasi, pengukuran objektif didukung oleh integrasi platform pihak ketiga (Maze) dan triangulasi data kuesioner.
 
 ---
 
 ## 6. Kesimpulan dan Saran
 
-Ringkasan kesimpulan & saran penelitian lanjutan: lihat [../07-manuskrip/06-kesimpulan.md](../07-manuskrip/06-kesimpulan.md).
+**Kesimpulan:**
 
-Inti kesimpulan: skema **Redis-PostgreSQL Hybrid Caching** efektif memitigasi JWKS Endpoint Flooding — tanpa overhead pada kondisi normal, melindungi traffic legitimate secara signifikan saat diserang, dan memangkas beban PostgreSQL 93–99,997% pada mayoritas skenario — dengan satu trade-off teridentifikasi pada desain rate-limiting berbasis baris counter tunggal per klien saat pola serangan menggunakan `kid` yang selalu baru.
+Implementasi strategi manipulasi antarmuka melalui taktik *Urgency Dark Pattern* secara empiris terbukti merusak pengalaman interaksi pengguna. Hipotesis Alternatif (H1) didukung sepenuhnya oleh data statistik. Penggunaan desain manipulatif ini menuntut *trade-off* yang merugikan: platform mungkin dapat menahan laju pembatalan pesanan untuk sesaat, namun harus menanggung kerugian jangka panjang berupa hancurnya integritas sistem, kenyamanan navigasi, dan loyalitas konsumen.
+
+**Saran:**
+
+Penelitian lanjutan disarankan untuk melakukan *Ablation Study* guna mengukur efektivitas dari berbagai tingkat kehalusan *Dark Pattern*. Selain itu, pemanfaatan perangkat pelacakan biometrik seperti *Eye Tracking* direkomendasikan untuk memvalidasi indikator kepanikan kognitif secara *real-time*.
 
 ---
 
 ## 7. Lampiran — Peta Artefak Penelitian
 
-| Folder | Isi | Status |
-|---|---|---|
-| [01-proposal/](../01-proposal/) | Proposal penelitian | Selesai |
-| [02-literatur/](../02-literatur/) | Matriks literatur (kerangka, perlu dilengkapi) | Kerangka tersedia |
-| [03-teori/](../03-teori/) | Diagram arsitektur & skema (Tahap 1) | Selesai |
-| [04-data/](../04-data/) | Data mentah 400 run/40 replikasi (tidak di-commit, lihat `.gitignore`; matrix awal 50 run/5 replikasi diarsipkan di `_archive-50run-20260612/`) | Tersedia lokal |
-| [05-kode/gateway/](../05-kode/gateway/) | Source code API Gateway (Go) | Selesai |
-| [05-kode/k6/](../05-kode/k6/) | Skrip pengujian beban k6 | Selesai |
-| [05-kode/analysis/](../05-kode/analysis/) | Pipeline analisis Python | Selesai |
-| [06-output/](../06-output/) | Tabel & figure hasil analisis | Selesai |
-| [07-manuskrip/](../07-manuskrip/) | Draf naskah jurnal (Tahap 5) | Sedang berjalan |
-| [08-laporan/](../08-laporan/) | Laporan penelitian (dokumen ini) | Selesai |
-| [09-docs/](../09-docs/) | Dokumen rencana & status tiap tahap | Selesai |
+| Direktori | Isi | Status |
+| --- | --- | --- |
+| `01-proposal/` | Proposal penelitian dan Desain Eksperimen. | Selesai |
+| `02-literatur/` | Matriks kajian literatur *Dark Pattern* dan *Usability*. | Selesai |
+| `04-data/` | Data primer 70 responden dalam format spreadsheet. | Selesai |
+| `05-kode/analysis/` | Skrip komputasi analisis data (Python/Jupyter). | Selesai |
+| `06-output/` | Tabel statistik deskriptif dan grafik hasil visualisasi. | Selesai |
+| `07-manuskrip/` | Naskah publikasi jurnal siap kirim. | Selesai |
+| `08-laporan/` | Laporan akhir penelitian (dokumen ini). | Selesai |
 
 **Cara reproduksi penuh:**
+
 
 ```bash
 # Tahap 2: jalankan gateway (lihat 05-kode/gateway/README.md)
